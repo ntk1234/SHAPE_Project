@@ -18,8 +18,13 @@ public class CharController : MonoBehaviour
                         // 踢撃計時器
     
     
-     // public float hkickRate = 1f;
-   // public float hkickTimer;
+     public float fightRate = 1f;            // 打撃頻率
+        public  float fightTimer;  
+                        // 打撃計時器
+
+    public bool isPunch = false;
+
+    public bool isKick = false;
  
     // Start is called before the first frame update
     void Start()
@@ -28,7 +33,7 @@ public class CharController : MonoBehaviour
         animator = GetComponent<Animator>();
 
         kickTimer = kickRate;
-       // hkickTimer = hkickRate;
+       fightTimer = fightRate;
     }
 
     // Update is called once per frame
@@ -43,9 +48,9 @@ public class CharController : MonoBehaviour
         moveDirection = Camera.main.transform.TransformDirection(moveDirection);
         moveDirection.y = 0;
 
-         kickTimer += Time.deltaTime;//踢撃時間器運作
+        kickTimer += Time.deltaTime;//踢撃時間器運作
 
-         //hkickTimer += Time.deltaTime;//h踢撃時間器運作
+        fightTimer += Time.deltaTime;//打撃時間器運作
 
         if (moveDirection != Vector3.zero)
         {
@@ -54,15 +59,17 @@ public class CharController : MonoBehaviour
         }
 
        
-        if (Input.GetKeyDown("j"))
+        if (Input.GetKeyDown("j")&& fightTimer >= fightRate&&!isKick&&!isPunch)
         {
+            isPunch=true;
             animator.SetTrigger("punch");
-            
+            fightTimer=0;
         } 
 
-        if (Input.GetKeyDown("k") && kickTimer >= kickRate)//踢撃條件達成
+        if (Input.GetKeyDown("k") && kickTimer >= kickRate&&!isKick&&!isPunch)//踢撃條件達成
         {
             
+            isKick=true;
             animator.SetTrigger("kick");
             kickTimer = 0f;
             

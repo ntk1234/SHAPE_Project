@@ -5,12 +5,13 @@ using UnityEngine;
 public class SetActtack : MonoBehaviour
 {
       public GameObject kickbox,hitbox;
-
+    
+    public CharController cc;
 
     // Start is called before the first frame update
     void Start()
     {
-      
+       cc = GetComponent<CharController>();
     }
 
     // Update is called once per frame
@@ -25,6 +26,7 @@ public class SetActtack : MonoBehaviour
     public void DeactivatePunchHitbox()
     {
         kickbox.SetActive(false);
+        cc.isKick=false;
     }
 
       public void ActivatePunchHitbox2()
@@ -34,5 +36,6 @@ public class SetActtack : MonoBehaviour
     public void DeactivatePunchHitbox2()
     {
         hitbox.SetActive(false);
+        cc.isPunch=false;
     }
 }
