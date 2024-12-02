@@ -7,8 +7,9 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100f; // 物件的最大生命值
     public float currentHealth;
-    
-    
+    //private HealingPack healing;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,8 +21,16 @@ public class PlayerHealth : MonoBehaviour
     {
         
     }
+    public void Heal(float amount)
+    {
+        // Add health but ensure it does not exceed the maximum health
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+        Debug.Log($"Player healed. Current health: {currentHealth}");
+    }
 
-     public void TakeDamage(int damage)
+
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage; // 減少當前生命值
 
