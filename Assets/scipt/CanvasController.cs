@@ -16,6 +16,12 @@ public class CanvasController : MonoBehaviour
 
     private bool isPaused = false;
 
+    public Text exptext;
+    
+    public Expupdate expupdate;
+
+    public GameObject gm;
+
     void Start()
     {
         // Get PlayerHealth components from the assigned GameObjects
@@ -38,6 +44,8 @@ public class CanvasController : MonoBehaviour
                 player2HpBar.value = player2Health.currentHealth; // Initialize with current health
             }
         }
+
+        expupdate = gm.GetComponent<Expupdate>();
     }
 
     void Update()
@@ -65,6 +73,8 @@ public class CanvasController : MonoBehaviour
                 PauseGame();
             }
         }
+
+        exptext.text = "Exp: " + expupdate.currentExp.ToString();
     }
 
     public void PauseGame()
