@@ -7,11 +7,15 @@ public class SetActtack : MonoBehaviour
       public GameObject kickbox,hitbox;
     
     public CharController cc;
+    public CharController1 cc1;
 
     // Start is called before the first frame update
     void Start()
     {
-       cc = GetComponent<CharController>();
+    
+        cc = GetComponent<CharController>();
+            
+        cc1= GetComponent<CharController1>();
     }
 
     // Update is called once per frame
@@ -19,11 +23,11 @@ public class SetActtack : MonoBehaviour
     {
        
     }
-    public void ActivatePunchHitbox()
+    public void ActivateKickHitbox()
     {
         kickbox.SetActive(true);
     }
-    public void DeactivatePunchHitbox()
+    public void DeactivateKickHitbox()
     {
         kickbox.SetActive(false);
         cc.isKick=false;
@@ -37,5 +41,26 @@ public class SetActtack : MonoBehaviour
     {
         hitbox.SetActive(false);
         cc.isPunch=false;
+    }
+
+
+     public void ActivateKickHitbox2P()
+    {
+        kickbox.SetActive(true);
+    }
+    public void DeactivateKickHitbox2P()
+    {
+        kickbox.SetActive(false);
+        cc1.isKick=false;
+    }
+
+      public void ActivatePunchHitbox2_2P()
+    {
+        hitbox.SetActive(true);
+    }
+    public void DeactivatePunchHitbox2_2p()
+    {
+        hitbox.SetActive(false);
+        cc1.isPunch=false;
     }
 }

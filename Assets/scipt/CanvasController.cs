@@ -74,7 +74,7 @@ public class CanvasController : MonoBehaviour
             }
         }
 
-        exptext.text = "Exp: " + expupdate.currentExp.ToString();
+        exptext.text = "Coins: " + expupdate.currentExp.ToString();
     }
 
     public void PauseGame()

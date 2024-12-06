@@ -3,15 +3,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 #endif
 
-namespace StarterAssets
-{
-	public class StarterAssetsInputs : MonoBehaviour
+
+	public class StarterAssetsInputs1: MonoBehaviour
 	{
 		[Header("Character Input Values")]
-		public Vector2 move;
-		
 		public Vector2 move2;
-		public Vector2 look;
+ 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
 
@@ -23,16 +20,10 @@ namespace StarterAssets
 		public bool cursorInputForLook = true;
 
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
-		{
-			MoveInput(value.Get<Vector2>());
-		}
-
 		public void OnMove2(InputValue value)
 		{
 			Move2Input(value.Get<Vector2>());
 		}
-
 
 		public void OnLook(InputValue value)
 		{
@@ -54,16 +45,10 @@ namespace StarterAssets
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		} 
-
 		public void Move2Input(Vector2 newMoveDirection)
 		{
 			move2 = newMoveDirection;
 		} 
-
 
 		public void LookInput(Vector2 newLookDirection)
 		{
@@ -91,4 +76,3 @@ namespace StarterAssets
 		}
 	}
 	
-}

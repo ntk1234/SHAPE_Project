@@ -39,8 +39,26 @@ public class CharController1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+         float h = 0;
+        float v = 0;
+
+        if (Input.GetKey("left"))
+        {
+            h = -1;
+        }
+        else if (Input.GetKey("right"))
+        {
+            h = 1;
+        }
+
+        if (Input.GetKey("down"))
+        {
+            v = -1;
+        }
+        else if (Input.GetKey("up"))
+        {
+            v = 1;
+        }
         Vector2 move = new Vector2(h, v);
         animator.SetFloat("speed", move.magnitude);
 

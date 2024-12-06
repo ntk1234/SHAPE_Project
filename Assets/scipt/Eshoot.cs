@@ -29,32 +29,44 @@ public class Eshoot : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-         float closestDistance = Mathf.Infinity;
-        for (int i = 0; i < targets.Length; i++)
+            void Update()
         {
-            float distance = Vector3.Distance(transform.position, targets[i].position);
-            if (distance < closestDistance)
+            float closestDistance = Mathf.Infinity;
+            bool targetDestroyed = false;
+
+            for (int i = 0; i < targets.Length; i++)
             {
-                closestDistance = distance;
-                currentTarget = targets[i];
+                if (targets[i] == currentTarget && targets[i] == null)
+                {
+                    targetDestroyed = true;
+                    break;
+                }
+                
+                if (targets[i] == null) // Check if the target is null
+                {
+                    continue; // Skip this target and move to the next one
+                }
+
+                float distance = Vector3.Distance(transform.position, targets[i].position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    currentTarget = targets[i];
+                }
+            }
+
+            if (currentTarget != null && closestDistance < detectionRadius)
+            {
+                transform.LookAt(currentTarget);
+            }
+
+            if ((isFire || targetDestroyed) && Time.time > nextFireTime)
+            {
+                nextFireTime = Time.time + fireRate;
+                FireBullet();
+                isFire = false;
             }
         }
-        if (currentTarget != null && closestDistance < detectionRadius)
-        {
-            transform.LookAt(currentTarget);
-        }
-
-           if (isFire&&Time.time > nextFireTime)
-        {
-            nextFireTime = Time.time + fireRate;
-            FireBullet();
-            isFire = false;
-        }
-
-    
-    }
 
     void FireBullet()
     {
