@@ -6,12 +6,16 @@ using UnityEngine.AI;
 public class NavMeshAi : MonoBehaviour
 {
     private NavMeshAgent agent;
+
+    private Animator animator;
     public Transform[] targets;
     private Transform currentTarget;
     public Eshoot es;
 
     void Start()
     {
+
+        animator = GetComponent<Animator>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         targets = new Transform[playerObjects.Length];
         for (int i = 0; i < playerObjects.Length; i++)
@@ -31,13 +35,24 @@ public class NavMeshAi : MonoBehaviour
 
                 if (currentTarget != null && agent.isOnNavMesh)
                 {
+                    
+                    animator.SetFloat("speed",1);
                     agent.destination = currentTarget.position;
 
                     if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance + 2)
                     {
-                        es.isFire = true;
+                        animator.SetFloat("speed",0); 
+                       animator.SetTrigger("emAttack");
+                      
                     }
+                 //  if (Vector3.Distance(transform.position, agent.destination) <= agent.stoppingDistance)
+                     //  {
+                    //       animator.SetFloat("speed",0);
+                    //   }
                 }
+
+                
+               
             }
 
             void FindNextTarget()
@@ -71,6 +86,11 @@ public class NavMeshAi : MonoBehaviour
                     currentTarget = targets[1];
                   
                 }
+            }
+
+            void enemyFire()
+            {
+             es.isFire = true;
             }
 
  

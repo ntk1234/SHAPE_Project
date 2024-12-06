@@ -5,8 +5,10 @@ using UnityEngine;
 public class Eshoot : MonoBehaviour
 {
 
-
+ 
     public bool isFire = false;
+
+   
     public GameObject bulletPrefab;
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
@@ -18,6 +20,7 @@ public class Eshoot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
          GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         targets = new Transform[playerObjects.Length];
         for (int i = 0; i < playerObjects.Length; i++)
