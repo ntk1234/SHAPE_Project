@@ -3,19 +3,22 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
-    public Slider player1HpBar;
-    public Slider player2HpBar;
-
+    [Header("Set Player")]
     public GameObject player1; // Drag and drop the Player 1 GameObject in the Inspector
     public GameObject player2; // Drag and drop the Player 2 GameObject in the Inspector
 
     private PlayerHealth player1Health;
     private PlayerHealth player2Health;
 
-    public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
+    [Header("Set HP Bar")]
+    public Slider player1HpBar;
+    public Slider player2HpBar;
 
+    [Header("PauseMenu")]
+    public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
     private bool isPaused = false;
 
+    [Header("null")]
     public Text exptext;
     
     public Expupdate expupdate;
