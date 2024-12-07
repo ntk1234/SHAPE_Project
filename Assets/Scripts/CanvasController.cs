@@ -18,12 +18,17 @@ public class CanvasController : MonoBehaviour
     public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
     private bool isPaused = false;
 
-    [Header("null")]
-    public Text exptext;
-    
-    public Expupdate expupdate;
+    [Header("Experience Display")]
+    public Text exptext; // Text element to display experience or coins
+    public Expupdate expupdate; // Reference to the Expupdate script
+    public GameObject gm; // GameManager or related object holding Expupdate
 
-    public GameObject gm;
+    [Header("Wave Timer")]
+    public Text waveTimerText; // UI Text element to display the wave timer
+    public GameManager gameManager; // Reference to the GameManager script
+
+    private float countdownTimer; // Timer for countdown
+    private bool isCountingDown; // Flag to track if countdown is active
 
     void Start()
     {
@@ -48,7 +53,16 @@ public class CanvasController : MonoBehaviour
             }
         }
 
-        expupdate = gm.GetComponent<Expupdate>();
+        if (gm != null)
+        {
+            expupdate = gm.GetComponent<Expupdate>();
+        }
+
+        if (gameManager != null)
+        {
+            countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
+            isCountingDown = true; // Begin the countdown
+        }
     }
 
     void Update()
@@ -64,6 +78,31 @@ public class CanvasController : MonoBehaviour
             player2HpBar.value = player2Health.currentHealth;
         }
 
+        // Update the experience text
+        if (exptext != null && expupdate != null)
+        {
+            exptext.text = "Coins: " + expupdate.currentExp.ToString();
+        }
+
+        // Countdown logic for wave timer
+        if (isCountingDown)
+        {
+            countdownTimer -= Time.deltaTime;
+
+            if (waveTimerText != null)
+            {
+                waveTimerText.text = countdownTimer > 0
+                    ? $"Next Wave In: {countdownTimer:F1}s"
+                    : "Wave in Progress!";
+            }
+
+            if (countdownTimer <= 0)
+            {
+                countdownTimer = 0; // Ensure it doesn't go below 0
+                isCountingDown = false; // Stop the countdown
+            }
+        }
+
         // Check for pause toggle (default key: Escape)
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -76,8 +115,12 @@ public class CanvasController : MonoBehaviour
                 PauseGame();
             }
         }
+    }
 
-        exptext.text = "Coins: " + expupdate.currentExp.ToString();
+    public void StartNewWaveCountdown(float waveStartTime)
+    {
+        countdownTimer = waveStartTime; // Reset timer for the next wave
+        isCountingDown = true; // Restart the countdown
     }
 
     public void PauseGame()
