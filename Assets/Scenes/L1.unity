@@ -11429,7 +11429,6 @@ MonoBehaviour:
   expupdate: {fileID: 1638613606}
   gm: {fileID: 1638613604}
   waveTimerText: {fileID: 1065300809}
-  gameManager: {fileID: 1638613609}
 --- !u!1 &635187731
 GameObject:
   m_ObjectHideFlags: 0
@@ -13283,7 +13282,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 43.049988, y: -103.3}
-  m_SizeDelta: {x: 167.9, y: 38.600006}
+  m_SizeDelta: {x: 393.41, y: 38.600006}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1069826889
 GameObject:
@@ -14995,7 +14994,6 @@ MonoBehaviour:
       spawnInterval: 1
   radius: 30
   minEnemyDistance: 5
-  canvasController: {fileID: 0}
 --- !u!1 &1665086100
 GameObject:
   m_ObjectHideFlags: 0

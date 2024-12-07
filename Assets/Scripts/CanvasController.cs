@@ -3,6 +3,8 @@ using UnityEngine.UI;
 
 public class CanvasController : MonoBehaviour
 {
+    private GameManager gameManager; // Reference to the GameManager script
+
     [Header("Set Player")]
     public GameObject player1; // Drag and drop the Player 1 GameObject in the Inspector
     public GameObject player2; // Drag and drop the Player 2 GameObject in the Inspector
@@ -25,13 +27,19 @@ public class CanvasController : MonoBehaviour
 
     [Header("Wave Timer")]
     public Text waveTimerText; // UI Text element to display the wave timer
-    public GameManager gameManager; // Reference to the GameManager script
 
     private float countdownTimer; // Timer for countdown
     private bool isCountingDown; // Flag to track if countdown is active
 
     void Start()
     {
+        gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
+        if (gameManager != null)
+        {
+            countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
+            isCountingDown = true; // Begin the countdown
+        }
+
         // Get PlayerHealth components from the assigned GameObjects
         if (player1 != null)
         {
@@ -92,7 +100,7 @@ public class CanvasController : MonoBehaviour
             if (waveTimerText != null)
             {
                 waveTimerText.text = countdownTimer > 0
-                    ? $"Next Wave In: {countdownTimer:F1}s"
+                    ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
                     : "Wave in Progress!";
             }
 
@@ -117,10 +125,17 @@ public class CanvasController : MonoBehaviour
         }
     }
 
+    // Method to start the countdown for the next wave
     public void StartNewWaveCountdown(float waveStartTime)
     {
         countdownTimer = waveStartTime; // Reset timer for the next wave
         isCountingDown = true; // Restart the countdown
+    }
+
+    public void OnWaveCompleted()
+    {
+        // Reset timer and start the countdown for the next wave
+        StartNewWaveCountdown(gameManager.timeBetweenWaves);
     }
 
     public void PauseGame()
