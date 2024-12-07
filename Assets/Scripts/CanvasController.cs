@@ -28,7 +28,7 @@ public class CanvasController : MonoBehaviour
     [Header("Wave Timer")]
     public Text waveTimerText; // UI Text element to display the wave timer
 
-    private float countdownTimer; // Timer for countdown
+    public float countdownTimer; // Timer for countdown
     private bool isCountingDown; // Flag to track if countdown is active
 
     void Start()
@@ -99,9 +99,7 @@ public class CanvasController : MonoBehaviour
 
             if (waveTimerText != null)
             {
-                waveTimerText.text = countdownTimer > 0
-                    ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
-                    : "Wave in Progress!";
+                SendWaveText();
             }
 
             if (countdownTimer <= 0)
@@ -123,6 +121,15 @@ public class CanvasController : MonoBehaviour
                 PauseGame();
             }
         }
+    }
+    public void SendWaveText()
+
+    {
+
+            waveTimerText.text = countdownTimer > 0
+            ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
+            : "Wave in Progress!";
+
     }
 
     // Method to start the countdown for the next wave

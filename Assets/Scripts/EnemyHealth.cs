@@ -23,7 +23,7 @@ public class EnemyHealth : MonoBehaviour
     void Start()
     {
          currentHealth = maxHealth;
-         expupdate = gm.GetComponent<Expupdate>();
+         expupdate = GameObject.Find("GameManger").GetComponent<Expupdate>();
     }
 
     // Update is called once per frame
@@ -43,8 +43,14 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= damage; 
         if (currentHealth <= 0)
         {
-            Die();
-            expupdate.currentExp += exp;
+
+           if (Random.value < 0.5f) // 50% chance
+            {
+                expupdate.currentExp += exp;
+                Debug.Log("Enemy defeated and gained EXP!");
+            }
+
+             Die();
         }
         
     }

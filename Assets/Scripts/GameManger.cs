@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public float radius = 30f;
     public float minEnemyDistance = 5f;
 
-    private CanvasController canvasController; // Reference to the CanvasController script
+    public CanvasController canvasController; // Reference to the CanvasController script
 
     [System.Serializable]
     public class EnemySettings
@@ -79,6 +79,11 @@ public class GameManager : MonoBehaviour
             {
                 currentWaveIndex++;
                 waveInProgress = true;
+                canvasController.SendWaveText();
+                 while (canvasController.countdownTimer > 0)
+            {
+                yield return null;
+            }
 
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
 

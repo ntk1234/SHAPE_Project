@@ -41,6 +41,7 @@ public class SetActtack : MonoBehaviour
     {
         hitbox.SetActive(false);
         cc.isPunch=false;
+        Debug.Log("isPunch=false");
     }
 
 

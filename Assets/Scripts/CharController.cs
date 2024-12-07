@@ -13,7 +13,7 @@ public class CharController : MonoBehaviour
      public float rotSpeed = 10;
     Vector3 moveDirection;
 
-     public float kickRate = 1f;            // 踢撃頻率
+     public float kickRate = 3f;            // 踢撃頻率
         public  float kickTimer;  
                         // 踢撃計時器
     
