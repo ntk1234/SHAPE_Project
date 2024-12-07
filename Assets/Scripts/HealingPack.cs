@@ -35,12 +35,13 @@ public class HealingPack : MonoBehaviour
                     }
 
                     // Destroy the healing pack after the sound has played
-                    Destroy(gameObject);
+                    // Destroy(gameObject);
                 }
                 else
                 {
                     Debug.Log("Player already at maximum health. Healing not applied.");
                 }
+                Destroy(gameObject);
             }
         }
     }

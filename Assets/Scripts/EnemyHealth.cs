@@ -18,12 +18,15 @@ public class EnemyHealth : MonoBehaviour
     
     public GameObject gm;
 
+     public GameObject healthPackPrefab;
+
     
     // Start is called before the first frame update
     void Start()
     {
          currentHealth = maxHealth;
          expupdate = GameObject.Find("GameManger").GetComponent<Expupdate>();
+        //healthPackPrefab =  GameObject.Find("/Prefabs/HealingPack");
     }
 
     // Update is called once per frame
@@ -36,6 +39,12 @@ public class EnemyHealth : MonoBehaviour
      public void Die()
     {
           Debug.Log("Enemy died");
+      //  Instantiate(healthPackPrefab, transform.position, Quaternion.identity);
+        
+           if (Random.value < 0.25f)
+            {
+        DropHealthPack();
+            }
         Destroy(gameObject);
     }
       public void TakeDamage(int damage)
@@ -53,6 +62,12 @@ public class EnemyHealth : MonoBehaviour
              Die();
         }
         
+    }
+
+    void DropHealthPack()
+    {
+        // 從預置物體生成血包
+        Instantiate(healthPackPrefab, transform.position, Quaternion.identity);
     }
 
 }
