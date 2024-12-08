@@ -68,6 +68,8 @@ public class EnemyHealth : MonoBehaviour
     {
         // 從預置物體生成血包
         Instantiate(healthPackPrefab, transform.position, Quaternion.identity);
+        
+         
     }
 
 }

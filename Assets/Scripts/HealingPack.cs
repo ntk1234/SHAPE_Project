@@ -7,11 +7,16 @@ public class HealingPack : MonoBehaviour
     public float healingHP = 20f; // Amount of health to restore
     private AudioSource soundEffects;
 
+    
     void Start()
     {
         soundEffects = GetComponent<AudioSource>();
     }
 
+    void Update()
+    {
+       
+    }
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object colliding is the player
@@ -44,5 +49,6 @@ public class HealingPack : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        
     }
 }
