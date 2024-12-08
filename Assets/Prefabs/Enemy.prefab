@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFire: 0
   bulletPrefab: {fileID: 1992724552612917618, guid: dcbf68245fbfb6e4f95d4692b8665f93, type: 3}
-  bulletSpeed: 10
+  bulletSpeed: 3
   fireRate: 2
   detectionRadius: 10
   targets: []
