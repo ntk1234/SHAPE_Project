@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetActtack : MonoBehaviour
 {
-      public GameObject kickbox,hitbox;
+      public GameObject kickbox,hitbox,hkickbox;
     
     public CharController cc;
     public CharController1 cc1;
@@ -31,6 +31,16 @@ public class SetActtack : MonoBehaviour
     {
         kickbox.SetActive(false);
         cc.isKick=false;
+    }
+
+     public void ActivateHKickHitbox()
+    {
+        hkickbox.SetActive(true);
+    }
+    public void DeactivateHKickHitbox()
+    {
+        hkickbox.SetActive(false);
+        cc.isHKick=false;
     }
 
       public void ActivatePunchHitbox2()

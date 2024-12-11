@@ -12,6 +12,8 @@ public class CanvasController : MonoBehaviour
     private PlayerHealth player1Health;
     private PlayerHealth player2Health;
 
+    public CharController cc;
+    public CharController1 cc1;
     [Header("Set HP Bar")]
     public Slider player1HpBar;
     public Slider player2HpBar;
@@ -22,6 +24,8 @@ public class CanvasController : MonoBehaviour
 
     [Header("Experience Display")]
     public Text exptext; // Text element to display experience or coins
+    public Text kickcdtext;
+    public Text hkickcdtext;
     public Expupdate expupdate; // Reference to the Expupdate script
     public GameObject gm; // GameManager or related object holding Expupdate
 
@@ -34,6 +38,11 @@ public class CanvasController : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
+        
+        cc=player1.GetComponent<CharController>();
+
+        cc1=player2.GetComponent<CharController1>();
+
         if (gameManager != null)
         {
             countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
@@ -91,7 +100,16 @@ public class CanvasController : MonoBehaviour
         {
             exptext.text = "Coins: " + expupdate.currentExp.ToString();
         }
+         // Update the experience text
+        if (kickcdtext != null && cc != null)
+        {
+            kickcdtext.text = "1p Kick Cd: " + Mathf.FloorToInt(cc.kickTimer).ToString();
+        }
 
+        if (hkickcdtext != null && cc != null)
+        {
+            hkickcdtext.text = "H Kick Cd: " + Mathf.FloorToInt(cc.hkickTimer).ToString();
+        }
         // Countdown logic for wave timer
         if (isCountingDown)
         {

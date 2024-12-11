@@ -17,6 +17,8 @@ public class CharController : MonoBehaviour
         public  float kickTimer;  
                         // 踢撃計時器
     
+      public float hkickRate = 10f;            // 踢撃頻率
+        public  float hkickTimer;  
     
      public float fightRate = 1f;            // 打撃頻率
         public  float fightTimer;  
@@ -25,14 +27,19 @@ public class CharController : MonoBehaviour
     public bool isPunch = false;
 
     public bool isKick = false;
+
+     public bool isHKick = false;
+
+        public Shop shop;
  
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-
+        shop = GameObject.Find("GameManger").GetComponent<Shop>();
         kickTimer = kickRate;
+        hkickTimer = hkickRate;
        fightTimer = fightRate;
     }
 
@@ -68,6 +75,8 @@ public class CharController : MonoBehaviour
 
         kickTimer += Time.deltaTime;//踢撃時間器運作
 
+        hkickTimer += Time.deltaTime;
+
         fightTimer += Time.deltaTime;//打撃時間器運作
 
         if (moveDirection != Vector3.zero)
@@ -77,14 +86,19 @@ public class CharController : MonoBehaviour
         }
 
        
-        if (Input.GetKeyDown("j")&& fightTimer >= fightRate&&!isKick&&!isPunch)
+        if (Input.GetKeyDown("j")&& fightTimer >= fightRate&&!isKick&&!isPunch&&!isHKick)
         {
             isPunch=true;
             animator.SetTrigger("punch");
             fightTimer=0;
         } 
 
-        if (Input.GetKeyDown("k") && kickTimer >= kickRate&&!isKick&&!isPunch)//踢撃條件達成
+        if (kickTimer >= kickRate)
+         {
+            kickTimer=kickRate;
+         }
+
+        if (Input.GetKeyDown("k") && kickTimer >= kickRate&&!isKick&&!isPunch&&!isHKick)//踢撃條件達成
         {
             
             isKick=true;
@@ -92,14 +106,19 @@ public class CharController : MonoBehaviour
             kickTimer = 0f;
             
         }
+         
+         if (hkickTimer >= hkickRate)
+         {
+            hkickTimer=hkickRate;
+         }
 
-       // if (Input.GetKeyDown("l") && hkickTimer >= hkickRate)//踢撃條件達成
-       // {
+        if (Input.GetKeyDown("l") && hkickTimer >= hkickRate&&!isKick&&!isPunch&&!isHKick&&shop.isBuyhkick)//踢撃條件達成
+        {
+            isHKick= true;
+           animator.SetTrigger("hkick");
+           hkickTimer = 0f;
             
-        //    animator.SetTrigger("hkick");
-      //      hkickTimer = 0f;
-            
-       // }
+        }
 
         
     }
