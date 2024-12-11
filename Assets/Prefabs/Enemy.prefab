@@ -278,15 +278,16 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 0
   damage: 10
-  exp: 10
+  exp: 20
   expupdate: {fileID: 0}
   gm: {fileID: 0}
-  cube: {fileID: 4906645329606810658}
   healthPackPrefab: {fileID: 8465656554721108770, guid: 2109c74deb5b2ed4caf883e1ef7359d6, type: 3}
   originalMaterial: {fileID: 0}
   flashMaterial: {fileID: 0}
-  skinnedMeshRenderer: {fileID: 4272787867969072088}
-  flashDuration: 0.1
+  duration: 0.7
+  skinnedMeshRenderers: []
+  cubes:
+  - {fileID: 4906645329606810658}
 --- !u!143 &5545608696816876746
 CharacterController:
   m_ObjectHideFlags: 0
@@ -304,7 +305,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1
   m_Radius: 0.5
