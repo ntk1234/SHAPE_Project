@@ -35,6 +35,9 @@ public class CanvasController : MonoBehaviour
     public float countdownTimer; // Timer for countdown
     private bool isCountingDown; // Flag to track if countdown is active
 
+    [Header("Win Game")]
+    public GameObject winGameUI;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
@@ -161,6 +164,14 @@ public class CanvasController : MonoBehaviour
     {
         // Reset timer and start the countdown for the next wave
         StartNewWaveCountdown(gameManager.timeBetweenWaves);
+    }
+
+    public void WinGame()
+    {
+        Time.timeScale = 0f; // Freeze the game
+        winGameUI.SetActive(true); // Show the pause menu
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
     }
 
     public void PauseGame()

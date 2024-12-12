@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     private GameObject player;
 
+    
+
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
     public float timeBetweenWaves = 10f; // Delay between waves
@@ -64,6 +66,8 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(WaveManager()); // Start wave management
             }
         }
+
+
     }
 
     public float GetWaveTimer()
@@ -71,36 +75,43 @@ public class GameManager : MonoBehaviour
         return isWaveStartCountdown ? Mathf.Max(0, waveTimer) : 0f;
     }
 
-    private IEnumerator WaveManager()
+   private IEnumerator WaveManager()
+{
+    while (true)
     {
-        while (true)
+        if (!waveInProgress && currentWaveIndex < waves.Count - 1)
         {
-            if (!waveInProgress && currentWaveIndex < waves.Count - 1)
-            {
-                currentWaveIndex++;
-                waveInProgress = true;
-                canvasController.SendWaveText();
-                 while (canvasController.countdownTimer > 0)
+            currentWaveIndex++;
+            waveInProgress = true;
+            canvasController.SendWaveText();
+            while (canvasController.countdownTimer > 0)
             {
                 yield return null;
             }
 
-                yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
+            yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
 
-                // Wait for timeBetweenWaves after the wave ends
-                waveTimer = timeBetweenWaves;
-                isWaveStartCountdown = true;
+            // Wait for timeBetweenWaves after the wave ends
+            waveTimer = timeBetweenWaves;
+            isWaveStartCountdown = true;
 
-                // Notify the CanvasController to restart the wave countdown
-                if (canvasController != null)
-                {
-                    canvasController.StartNewWaveCountdown(waveTimer);
-                }
+            // Notify the CanvasController to restart the wave countdown
+            if (canvasController != null)
+            {
+                canvasController.StartNewWaveCountdown(waveTimer);
             }
-
-            yield return null;
         }
+        else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+        {
+            // All waves completed and all enemies destroyed, trigger win state
+            Debug.Log("All waves completed and all enemies destroyed. You win!");
+            canvasController.WinGame();
+            // Add your win state logic here
+        }
+
+        yield return null;
     }
+}
 
     private IEnumerator StartWave(Wave wave)
     {

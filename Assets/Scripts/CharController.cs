@@ -86,7 +86,7 @@ public class CharController : MonoBehaviour
         }
 
        
-        if (Input.GetKeyDown("j")&& fightTimer >= fightRate&&!isKick&&!isPunch&&!isHKick)
+        if (Input.GetKeyDown("e")&& fightTimer >= fightRate&&!isKick&&!isPunch&&!isHKick)
         {
             isPunch=true;
             animator.SetTrigger("punch");
@@ -98,7 +98,7 @@ public class CharController : MonoBehaviour
             kickTimer=kickRate;
          }
 
-        if (Input.GetKeyDown("k") && kickTimer >= kickRate&&!isKick&&!isPunch&&!isHKick)//踢撃條件達成
+        if (Input.GetKeyDown("r") && kickTimer >= kickRate&&!isKick&&!isPunch&&!isHKick)//踢撃條件達成
         {
             
             isKick=true;
@@ -112,7 +112,7 @@ public class CharController : MonoBehaviour
             hkickTimer=hkickRate;
          }
 
-        if (Input.GetKeyDown("l") && hkickTimer >= hkickRate&&!isKick&&!isPunch&&!isHKick&&shop.isBuyhkick)//踢撃條件達成
+        if (Input.GetKeyDown("t") && hkickTimer >= hkickRate&&!isKick&&!isPunch&&!isHKick&&shop.isBuyhkick)//踢撃條件達成
         {
             isHKick= true;
            animator.SetTrigger("hkick");
