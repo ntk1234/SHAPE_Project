@@ -12,6 +12,7 @@ public class EnemyHealth : MonoBehaviour
     public GameObject gm;
     
     public GameObject healthPackPrefab;
+    public List<GameObject> otherPackPrefabs = new List<GameObject>();
     public Material originalMaterial;
 
     public Material originalMaterial2;
@@ -20,6 +21,8 @@ public class EnemyHealth : MonoBehaviour
     public List<SkinnedMeshRenderer> skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
 
      public List<GameObject> cubes = new List<GameObject>();
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,13 +68,24 @@ public class EnemyHealth : MonoBehaviour
         {
             DropHealthPack();
         }
+        if (otherPackPrefabs.Count!=0){
+            DropOtherPack();
+        }      
         Destroy(gameObject);
     }
 
     void DropHealthPack()
     {
+
+        Instantiate( healthPackPrefab, transform.position, Quaternion.identity);
+    }
+     void DropOtherPack()
+    {
         // 從預置物體生成血包
-        Instantiate(healthPackPrefab, transform.position, Quaternion.identity);
+        int randomIndex = Random.Range(0, otherPackPrefabs.Count);
+        GameObject selectedOtherPackPrefab = otherPackPrefabs[randomIndex];
+
+        Instantiate(selectedOtherPackPrefab, transform.position, Quaternion.identity);
     }
 
     public void TakeDamage(int damage)

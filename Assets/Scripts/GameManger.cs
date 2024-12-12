@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private GameObject player;
 
-    
+    public bool iswingame=false;
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
@@ -95,18 +95,31 @@ public class GameManager : MonoBehaviour
             waveTimer = timeBetweenWaves;
             isWaveStartCountdown = true;
 
+             if (!iswingame&&GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // Check if it's the first wave
+            {
+                Debug.Log("First wave completed! Transitioning to the shop menu.");
+                // Add your code to transition to the shop menu here
+
+                // For example, you can load a new scene for the shop menu
+                canvasController.CallShopMenu();
+            }
+         
             // Notify the CanvasController to restart the wave countdown
             if (canvasController != null)
             {
                 canvasController.StartNewWaveCountdown(waveTimer);
             }
+          
         }
         else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
         {
-            // All waves completed and all enemies destroyed, trigger win state
-            Debug.Log("All waves completed and all enemies destroyed. You win!");
-            canvasController.WinGame();
-            // Add your win state logic here
+        
+           
+                Debug.Log("All waves completed and all enemies destroyed. You win!");
+                iswingame=true;
+                canvasController.WinGame();
+                // Add your win state logic here
+            
         }
 
         yield return null;

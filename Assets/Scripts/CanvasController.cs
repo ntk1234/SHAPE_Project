@@ -38,6 +38,9 @@ public class CanvasController : MonoBehaviour
     [Header("Win Game")]
     public GameObject winGameUI;
 
+    [Header("Shop Menu")]
+    public GameObject shopMenuUI;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
@@ -166,6 +169,23 @@ public class CanvasController : MonoBehaviour
         StartNewWaveCountdown(gameManager.timeBetweenWaves);
     }
 
+     public void CallShopMenu()
+    {
+        Time.timeScale = 0f; // Freeze the game
+        shopMenuUI.SetActive(true); // Show the pause menu
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
+    }
+
+     public void ResumeShopMenu()
+    {
+       
+        Time.timeScale = 1f; // Resume the game
+        shopMenuUI.SetActive(false); // Hide the pause menu
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Cursor.visible = false; // Hide the cursor
+    }
+
     public void WinGame()
     {
         Time.timeScale = 0f; // Freeze the game
@@ -173,6 +193,7 @@ public class CanvasController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
     }
+
 
     public void PauseGame()
     {

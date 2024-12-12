@@ -20,6 +20,8 @@ public class PlayerHealth : MonoBehaviour
         {
             damageCooldownTimer -= Time.deltaTime;
         }
+
+        
     }
 
     public void Heal(float amount)
