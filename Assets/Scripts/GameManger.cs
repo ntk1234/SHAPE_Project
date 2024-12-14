@@ -24,9 +24,7 @@ public class GameManager : MonoBehaviour
     public float minEnemyDistance = 5f;
 
     public CanvasController canvasController; // Reference to the CanvasController script
-    public Text scoreText; // Reference to the Text component to display the score
-
-    private int score = 0; // Score variable
+    public int score = 0; // Score variable
 
     [System.Serializable]
     public class EnemySettings
@@ -53,9 +51,6 @@ public class GameManager : MonoBehaviour
         {
             canvasController.StartNewWaveCountdown(waveTimer);
         }
-
-        // Initialize the score display
-        UpdateScoreDisplay();
     }
 
     void Update()
@@ -180,15 +175,9 @@ public class GameManager : MonoBehaviour
     public void AddScore(int points)
     {
         score += points;
-        UpdateScoreDisplay(); // Update the score display
-    }
-
-    // Update the UI to show the score
-    private void UpdateScoreDisplay()
-    {
-        if (scoreText != null)
+        if (canvasController != null)
         {
-            scoreText.text = "Score: " + score.ToString();
+            canvasController.UpdateScoreDisplay(score);
         }
     }
 }

@@ -14,9 +14,14 @@ public class CanvasController : MonoBehaviour
 
     public CharController cc;
     public CharController1 cc1;
+
     [Header("Set HP Bar")]
     public Slider player1HpBar;
     public Slider player2HpBar;
+    public float hpBarLerpSpeed = 5f; // Speed of the HP bar interpolation
+
+    [Header("Set Score Text")]
+    public Text scoreText; // Reference to the Text component to display the score
 
     [Header("PauseMenu")]
     public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
@@ -44,10 +49,9 @@ public class CanvasController : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
-        
-        cc=player1.GetComponent<CharController>();
 
-        cc1=player2.GetComponent<CharController1>();
+        cc = player1.GetComponent<CharController>();
+        cc1 = player2.GetComponent<CharController1>();
 
         if (gameManager != null)
         {
@@ -90,15 +94,15 @@ public class CanvasController : MonoBehaviour
 
     void Update()
     {
-        // Update the health bars based on the players' current health
+        // Smoothly update the health bars based on the players' current health
         if (player1Health != null)
         {
-            player1HpBar.value = player1Health.currentHealth;
+            player1HpBar.value = Mathf.Lerp(player1HpBar.value, player1Health.currentHealth, Time.deltaTime * hpBarLerpSpeed);
         }
 
         if (player2Health != null)
         {
-            player2HpBar.value = player2Health.currentHealth;
+            player2HpBar.value = Mathf.Lerp(player2HpBar.value, player2Health.currentHealth, Time.deltaTime * hpBarLerpSpeed);
         }
 
         // Update the experience text
@@ -106,7 +110,7 @@ public class CanvasController : MonoBehaviour
         {
             exptext.text = "Coins: " + expupdate.currentExp.ToString();
         }
-         // Update the experience text
+        // Update the experience text
         if (kickcdtext != null && cc != null)
         {
             kickcdtext.text = "1p Kick Cd: " + Mathf.FloorToInt(cc.kickTimer).ToString();
@@ -146,13 +150,22 @@ public class CanvasController : MonoBehaviour
             }
         }
     }
+
+    public void UpdateScoreDisplay(int _score)
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + _score;
+        }
+    }
+
     public void SendWaveText()
 
     {
 
-            waveTimerText.text = countdownTimer > 0
-            ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
-            : "Wave in Progress!";
+        waveTimerText.text = countdownTimer > 0
+        ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
+        : "Wave in Progress!";
 
     }
 
@@ -169,7 +182,7 @@ public class CanvasController : MonoBehaviour
         StartNewWaveCountdown(gameManager.timeBetweenWaves);
     }
 
-     public void CallShopMenu()
+    public void CallShopMenu()
     {
         Time.timeScale = 0f; // Freeze the game
         shopMenuUI.SetActive(true); // Show the pause menu
@@ -177,9 +190,9 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = true; // Make the cursor visible
     }
 
-     public void ResumeShopMenu()
+    public void ResumeShopMenu()
     {
-       
+
         Time.timeScale = 1f; // Resume the game
         shopMenuUI.SetActive(false); // Hide the pause menu
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
