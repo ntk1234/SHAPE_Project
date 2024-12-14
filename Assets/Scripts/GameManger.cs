@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;  // For UI elements
 
 public class GameManager : MonoBehaviour
 {
     private GameObject player;
-    private bool iswingame=false;
+    private bool iswingame = false;
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
@@ -23,6 +24,9 @@ public class GameManager : MonoBehaviour
     public float minEnemyDistance = 5f;
 
     public CanvasController canvasController; // Reference to the CanvasController script
+    public Text scoreText; // Reference to the Text component to display the score
+
+    private int score = 0; // Score variable
 
     [System.Serializable]
     public class EnemySettings
@@ -49,6 +53,9 @@ public class GameManager : MonoBehaviour
         {
             canvasController.StartNewWaveCountdown(waveTimer);
         }
+
+        // Initialize the score display
+        UpdateScoreDisplay();
     }
 
     void Update()
@@ -65,8 +72,6 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(WaveManager()); // Start wave management
             }
         }
-
-
     }
 
     public float GetWaveTimer()
@@ -74,56 +79,52 @@ public class GameManager : MonoBehaviour
         return isWaveStartCountdown ? Mathf.Max(0, waveTimer) : 0f;
     }
 
-   private IEnumerator WaveManager()
-{
-    while (true)
+    private IEnumerator WaveManager()
     {
-        if (!waveInProgress && currentWaveIndex < waves.Count - 1)
+        while (true)
         {
-            currentWaveIndex++;
-            waveInProgress = true;
-            canvasController.SendWaveText();
-            while (canvasController.countdownTimer > 0)
+            if (!waveInProgress && currentWaveIndex < waves.Count - 1)
             {
-                yield return null;
+                currentWaveIndex++;
+                waveInProgress = true;
+                canvasController.SendWaveText();
+                while (canvasController.countdownTimer > 0)
+                {
+                    yield return null;
+                }
+
+                yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
+
+                // Wait for timeBetweenWaves after the wave ends
+                waveTimer = timeBetweenWaves;
+                isWaveStartCountdown = true;
+
+                if (!iswingame && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // Check if it's the first wave
+                {
+                    Debug.Log("First wave completed! Transitioning to the shop menu.");
+                    // Add your code to transition to the shop menu here
+
+                    // For example, you can load a new scene for the shop menu
+                    canvasController.CallShopMenu();
+                }
+
+                // Notify the CanvasController to restart the wave countdown
+                if (canvasController != null)
+                {
+                    canvasController.StartNewWaveCountdown(waveTimer);
+                }
             }
-
-            yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
-
-            // Wait for timeBetweenWaves after the wave ends
-            waveTimer = timeBetweenWaves;
-            isWaveStartCountdown = true;
-
-             if (!iswingame&&GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // Check if it's the first wave
+            else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                Debug.Log("First wave completed! Transitioning to the shop menu.");
-                // Add your code to transition to the shop menu here
-
-                // For example, you can load a new scene for the shop menu
-                canvasController.CallShopMenu();
-            }
-         
-            // Notify the CanvasController to restart the wave countdown
-            if (canvasController != null)
-            {
-                canvasController.StartNewWaveCountdown(waveTimer);
-            }
-          
-        }
-        else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-        {
-        
-           
                 Debug.Log("All waves completed and all enemies destroyed. You win!");
-                iswingame=true;
+                iswingame = true;
                 canvasController.WinGame();
                 // Add your win state logic here
-            
-        }
+            }
 
-        yield return null;
+            yield return null;
+        }
     }
-}
 
     private IEnumerator StartWave(Wave wave)
     {
@@ -173,5 +174,21 @@ public class GameManager : MonoBehaviour
         }
 
         return Vector3.zero;
+    }
+
+    // Call this method to add points when an enemy is defeated
+    public void AddScore(int points)
+    {
+        score += points;
+        UpdateScoreDisplay(); // Update the score display
+    }
+
+    // Update the UI to show the score
+    private void UpdateScoreDisplay()
+    {
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
     }
 }

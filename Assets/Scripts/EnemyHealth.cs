@@ -12,6 +12,7 @@ public class LootItem
 
 public class EnemyHealth : MonoBehaviour
 {
+    private GameManager gameManager;
     [Header("Health Settings")]
     public float maxHealth = 100f; // Maximum health of the enemy
     public float currentHealth;
@@ -19,6 +20,7 @@ public class EnemyHealth : MonoBehaviour
     [Header("Damage and EXP")]
     public int damage = 10;
     public int exp = 10;
+    public int points = 10;
     public Expupdate expUpdate;
 
     [Header("Loot Settings")]
@@ -35,6 +37,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Start()
     {
+        gameManager = FindObjectOfType<GameManager>();
         // Initialize health
         currentHealth = maxHealth;
 
@@ -85,6 +88,11 @@ public class EnemyHealth : MonoBehaviour
 
         // Drop loot
         DropLoot();
+
+        if (gameManager != null)
+        {
+            gameManager.AddScore(points); // Add points when enemy dies
+        }
 
         Destroy(gameObject);
     }
