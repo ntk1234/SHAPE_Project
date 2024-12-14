@@ -26,11 +26,13 @@ public class GameManager : MonoBehaviour
     public CanvasController canvasController; // Reference to the CanvasController script
     public int score = 0; // Score variable
 
+    private Coroutine activeSpawnCoroutine; // Track the spawn coroutine
+
     [System.Serializable]
     public class EnemySettings
     {
         public GameObject enemyPrefab;
-        public int enemyCount;
+        public int maxEnemyCount; // Maximum number of this enemy type in the scene
         public float spawnInterval;
     }
 
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
     {
         public string waveName;
         public List<EnemySettings> enemies; // Enemies to spawn in this wave
+        public int targetScore; // Score target to complete the wave
     }
 
     void Start()
@@ -97,9 +100,6 @@ public class GameManager : MonoBehaviour
                 if (!iswingame && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // Check if it's the first wave
                 {
                     Debug.Log("First wave completed! Transitioning to the shop menu.");
-                    // Add your code to transition to the shop menu here
-
-                    // For example, you can load a new scene for the shop menu
                     canvasController.CallShopMenu();
                 }
 
@@ -114,7 +114,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log("All waves completed and all enemies destroyed. You win!");
                 iswingame = true;
                 canvasController.WinGame();
-                // Add your win state logic here
             }
 
             yield return null;
@@ -125,38 +124,74 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log($"Starting Wave: {wave.waveName}");
 
-        foreach (var enemySettings in wave.enemies)
-        {
-            StartCoroutine(SpawnEnemies(enemySettings));
-        }
+        // Start centralized spawn coroutine
+        activeSpawnCoroutine = StartCoroutine(SpawnEnemies(wave));
 
-        // Wait until all enemies are defeated
+        // Wait until the wave score target is met
         while (waveInProgress)
         {
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            if (score >= wave.targetScore)
             {
                 waveInProgress = false;
                 Debug.Log($"Wave {wave.waveName} Completed!");
+
+                // Stop the active spawn coroutine
+                if (activeSpawnCoroutine != null)
+                {
+                    StopCoroutine(activeSpawnCoroutine);
+                }
             }
 
             yield return null;
         }
+
+        // Ensure all enemies are cleared before transitioning
+        while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+        {
+            yield return null;
+        }
+
+        Debug.Log($"Wave {wave.waveName} fully cleared!");
     }
 
-    private IEnumerator SpawnEnemies(EnemySettings settings)
+    private IEnumerator SpawnEnemies(Wave wave)
     {
-        for (int i = 0; i < settings.enemyCount; i++)
+        Dictionary<GameObject, int> activeEnemies = new Dictionary<GameObject, int>();
+        foreach (var enemy in wave.enemies)
         {
-            Vector3 spawnPoint = RandomNavMeshLocation(radius);
+            activeEnemies[enemy.enemyPrefab] = 0;
+        }
 
-            if (spawnPoint != Vector3.zero
-                && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
+        while (waveInProgress)
+        {
+            foreach (var enemySettings in wave.enemies)
             {
-                Instantiate(settings.enemyPrefab, spawnPoint, Quaternion.identity);
+                int activeCount = CountActiveEnemies(enemySettings.enemyPrefab);
+                activeEnemies[enemySettings.enemyPrefab] = activeCount;
+
+                // Check if the number of active enemies is below the maximum allowed
+                if (activeCount < enemySettings.maxEnemyCount)
+                {
+                    Vector3 spawnPoint = RandomNavMeshLocation(radius);
+
+                    if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
+                    {
+                        Instantiate(enemySettings.enemyPrefab, spawnPoint, Quaternion.identity);
+                        Debug.Log($"Spawned {enemySettings.enemyPrefab.name}. Active count: {activeCount + 1}/{enemySettings.maxEnemyCount}");
+                    }
+                }
             }
 
-            yield return new WaitForSeconds(settings.spawnInterval);
+            // Wait for a unified spawn interval
+            yield return new WaitForSeconds(1f);
         }
+
+        Debug.Log("Stopped spawning enemies.");
+    }
+
+    private int CountActiveEnemies(GameObject enemyPrefab)
+    {
+        return GameObject.FindGameObjectsWithTag(enemyPrefab.tag).Length;
     }
 
     private Vector3 RandomNavMeshLocation(float radius)

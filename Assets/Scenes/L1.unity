@@ -14171,7 +14171,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000003326604, z: 0.0000000027271627, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -21376,19 +21376,21 @@ MonoBehaviour:
   - waveName: Wave 1
     enemies:
     - enemyPrefab: {fileID: 2174922284090481077, guid: 263d82104f44fa64b9ca0b4b9268048c, type: 3}
-      enemyCount: 3
-      spawnInterval: 1
+      maxEnemyCount: 5
+      spawnInterval: 2
     - enemyPrefab: {fileID: 5869503302785327015, guid: 6a61c20fbfc228946b43b1ca36d2aec8, type: 3}
-      enemyCount: 2
+      maxEnemyCount: 2
       spawnInterval: 1
+    targetScore: 100
   - waveName: Wave 2
     enemies:
     - enemyPrefab: {fileID: 2174922284090481077, guid: 263d82104f44fa64b9ca0b4b9268048c, type: 3}
-      enemyCount: 5
+      maxEnemyCount: 3
       spawnInterval: 1
     - enemyPrefab: {fileID: 5869503302785327015, guid: 6a61c20fbfc228946b43b1ca36d2aec8, type: 3}
-      enemyCount: 5
+      maxEnemyCount: 10
       spawnInterval: 1
+    targetScore: 200
   radius: 30
   minEnemyDistance: 5
   canvasController: {fileID: 615274425}
@@ -22647,7 +22649,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937108667}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000003326604, z: 0.0000000027271627, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
