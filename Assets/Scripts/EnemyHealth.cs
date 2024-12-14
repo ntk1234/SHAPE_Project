@@ -2,33 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class LootItem
+{
+    public GameObject prefab;
+    [Range(0f, 1f)]
+    public float dropChance;
+}
+
 public class EnemyHealth : MonoBehaviour
 {
-    public float maxHealth = 100f; // 物件的最大生命值
+    [Header("Health Settings")]
+    public float maxHealth = 100f; // Maximum health of the enemy
     public float currentHealth;
+
+    [Header("Damage and EXP")]
     public int damage = 10;
     public int exp = 10;
-    public Expupdate expupdate;
-    public GameObject gm;
-    
-    public GameObject healthPackPrefab;
-    public List<GameObject> otherPackPrefabs = new List<GameObject>();
-    public Material originalMaterial;
+    public Expupdate expUpdate;
 
-    public Material originalMaterial2;
+    [Header("Loot Settings")]
+    public List<LootItem> lootObjects = new List<LootItem>();
+
+    [Header("Visual Effects")]
+    public Material originalMaterial;
     public Material flashMaterial;
-    public float duration = 0.7f; // 閃爍持續時間
+    public float flashDuration = 0.7f; // Duration of the flash effect
     public List<SkinnedMeshRenderer> skinnedMeshRenderers = new List<SkinnedMeshRenderer>();
 
-     public List<GameObject> cubes = new List<GameObject>();
+    [Header("Optional Settings")]
+    public List<GameObject> cubes = new List<GameObject>();
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        // Initialize health
         currentHealth = maxHealth;
-        expupdate = GameObject.Find("GameManger").GetComponent<Expupdate>();
 
+        // Find Expupdate component
+        expUpdate = GameObject.Find("GameManger")?.GetComponent<Expupdate>();
+
+        // Gather SkinnedMeshRenderers and setup materials
         foreach (GameObject cube in cubes)
         {
             SkinnedMeshRenderer[] renderers = cube.GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -36,82 +49,69 @@ public class EnemyHealth : MonoBehaviour
             {
                 skinnedMeshRenderers.Add(renderer);
                 originalMaterial = renderer.material;
-                originalMaterial.color = renderer.material.color;
-               
             }
         }
 
-        flashMaterial = new Material(Shader.Find("Standard"));
-        flashMaterial.color = new Color(0.776f, 0.357f, 0.357f);
+        // Create flash material
+        flashMaterial = new Material(Shader.Find("Standard"))
+        {
+            color = new Color(0.776f, 0.357f, 0.357f)
+        };
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (currentHealth <= 0)
         {
-            if (Random.value < 0.5f) // 50% chance
-            {
-                expupdate.currentExp += exp;
-                Debug.Log("Enemy defeated and gained EXP!");
-            }
-
-            Die();
+            HandleDeath();
         }
     }
 
-    public void Die()
+    public void TakeDamage(int damageAmount)
     {
-        Debug.Log("Enemy died");
+        currentHealth -= damageAmount;
+        StartCoroutine(FlashEffect());
+    }
 
-        if (Random.value < 0.25f)
+    private void HandleDeath()
+    {
+        Debug.Log("Enemy defeated and gained EXP!");
+
+        // Grant EXP
+        if (Random.value < 0.5f)
         {
-            DropHealthPack();
+            expUpdate.currentExp += exp;
         }
-        if (otherPackPrefabs.Count!=0){
-            DropOtherPack();
-        }      
+
+        // Drop loot
+        DropLoot();
+
         Destroy(gameObject);
     }
 
-    void DropHealthPack()
+    private void DropLoot()
     {
-
-        Instantiate( healthPackPrefab, transform.position, Quaternion.identity);
-    }
-     void DropOtherPack()
-    {
-        // 從預置物體生成血包
-        int randomIndex = Random.Range(0, otherPackPrefabs.Count);
-        GameObject selectedOtherPackPrefab = otherPackPrefabs[randomIndex];
-
-        Instantiate(selectedOtherPackPrefab, transform.position, Quaternion.identity);
+        foreach (var lootItem in lootObjects)
+        {
+            if (Random.value < lootItem.dropChance)
+            {
+                Instantiate(lootItem.prefab, transform.position, Quaternion.identity);
+            }
+        }
     }
 
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-        StartCoroutine(FlashRedAndRecover());
-    }
-
-    IEnumerator FlashRedAndRecover()
-    {
-        StartCoroutine(FlashRed());
-        yield return new WaitForSeconds(0.5f); // 等待閃爍動畫播放完畢
-    }
-
-    IEnumerator FlashRed()
+    private IEnumerator FlashEffect()
     {
         float elapsedTime = 0f;
         Color originalColor = originalMaterial.color;
         Color flashColor = flashMaterial.color;
 
-        while (elapsedTime < duration)
+        while (elapsedTime < flashDuration)
         {
-            float t = elapsedTime / duration;
+            float lerpValue = Mathf.PingPong(elapsedTime * 10, 1);
             foreach (SkinnedMeshRenderer renderer in skinnedMeshRenderers)
             {
-                renderer.material.color = Color.Lerp(originalColor, flashColor, Mathf.PingPong(t * 10, 1));
+                renderer.material.color = Color.Lerp(originalColor, flashColor, lerpValue);
             }
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -119,9 +119,7 @@ public class EnemyHealth : MonoBehaviour
 
         foreach (SkinnedMeshRenderer renderer in skinnedMeshRenderers)
         {
-            renderer.material.color = Color.white; // 將顏色立即變回原本顏色
-
-        //renderer.material.color = originalColor ; 
+            renderer.material.color = originalColor;
         }
     }
 }

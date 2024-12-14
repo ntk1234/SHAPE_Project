@@ -279,14 +279,13 @@ MonoBehaviour:
   currentHealth: 0
   damage: 5
   exp: 20
-  expupdate: {fileID: 0}
-  gm: {fileID: 0}
-  healthPackPrefab: {fileID: 8465656554721108770, guid: 2109c74deb5b2ed4caf883e1ef7359d6, type: 3}
-  otherPackPrefabs: []
+  expUpdate: {fileID: 0}
+  lootObjects:
+  - prefab: {fileID: 8465656554721108770, guid: 2109c74deb5b2ed4caf883e1ef7359d6, type: 3}
+    dropChance: 0.25
   originalMaterial: {fileID: 0}
-  originalMaterial2: {fileID: 0}
   flashMaterial: {fileID: 0}
-  duration: 0.7
+  flashDuration: 0.7
   skinnedMeshRenderers: []
   cubes:
   - {fileID: 4906645329606810658}

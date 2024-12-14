@@ -6,8 +6,7 @@ using UnityEngine.AI;
 public class GameManager : MonoBehaviour
 {
     private GameObject player;
-
-    public bool iswingame=false;
+    private bool iswingame=false;
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
