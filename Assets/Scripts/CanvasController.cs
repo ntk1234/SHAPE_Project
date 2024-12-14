@@ -90,6 +90,9 @@ public class CanvasController : MonoBehaviour
             countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
             isCountingDown = true; // Begin the countdown
         }
+
+        // Initialize score display
+        UpdateScoreDisplay(0); // Assuming the initial score is 0
     }
 
     void Update()
