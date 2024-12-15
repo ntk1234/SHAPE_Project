@@ -235,23 +235,6 @@ public class CanvasController : MonoBehaviour
         StartNewWaveCountdown(gameManager.timeBetweenWaves);
     }
 
-    public void CallShopMenu()
-    {
-        Time.timeScale = 0f; // Freeze the game
-        shopMenuUI.SetActive(true); // Show the pause menu
-        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
-        Cursor.visible = true; // Make the cursor visible
-    }
-
-    public void ResumeShopMenu()
-    {
-
-        Time.timeScale = 1f; // Resume the game
-        shopMenuUI.SetActive(false); // Hide the pause menu
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Cursor.visible = false; // Hide the cursor
-    }
-
     public void WinGame()
     {
         Time.timeScale = 0f; // Freeze the game
@@ -320,7 +303,14 @@ public class CanvasController : MonoBehaviour
         _1pTitle.text = _1pIslive_str +"\n"+ _1pstr;
         _2pTitle.text = _2pIslive_str +"\n"+ _2pstr;
     }
-
+    public void CallShopMenu()
+    {
+        isPaused = true;
+        Time.timeScale = 0f; // Freeze the game
+        shopMenuUI.SetActive(true); // Show the pause menu
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor
+        Cursor.visible = true; // Make the cursor visible
+    }
 
     public void PauseGame()
     {
@@ -335,7 +325,14 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume the game
-        pauseMenuUI.SetActive(false); // Hide the pause menu
+        if (pauseMenuUI.activeSelf == true)
+        {
+            pauseMenuUI.SetActive(false);
+        }
+        if (shopMenuUI.activeSelf == true)
+        {
+            shopMenuUI.SetActive(false);
+        }
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
     }

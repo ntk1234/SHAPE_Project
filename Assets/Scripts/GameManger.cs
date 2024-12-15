@@ -6,6 +6,7 @@ using UnityEngine.UI;  // For UI elements
 
 public class GameManager : MonoBehaviour
 {
+    public CanvasController canvasController; // Reference to the CanvasController script
     private GameObject player;
     private bool iswingame = false;
 
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     public float radius = 30f;
     public float minEnemyDistance = 5f;
 
-    public CanvasController canvasController; // Reference to the CanvasController script
+    [Header("Score Settings")]
     public int score = 0; // Score variable
     
     public int _1pscore = 0;
