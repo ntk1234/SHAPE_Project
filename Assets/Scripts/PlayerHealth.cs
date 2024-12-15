@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public float damageCooldown = 0.5f; // Cooldown time for taking damage
     private float damageCooldownTimer = 0f; // Timer for damage cooldown
 
+    
+
     void Start()
     {
         currentHealth = maxHealth;

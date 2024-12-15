@@ -13,6 +13,11 @@ public class LootItem
 public class EnemyHealth : MonoBehaviour
 {
     private GameManager gameManager;
+
+        
+    [Header("Check Player")]    
+     public int playerID = 0; 
+
     [Header("Health Settings")]
     public float maxHealth = 100f; // Maximum health of the enemy
     public float currentHealth;
@@ -42,7 +47,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
 
         // Find Expupdate component
-        expUpdate = GameObject.Find("GameManger")?.GetComponent<Expupdate>();
+        expUpdate = GameObject.Find("GameManger").GetComponent<Expupdate>();
 
         // Gather SkinnedMeshRenderers and setup materials
         foreach (GameObject cube in cubes)
@@ -91,7 +96,7 @@ public class EnemyHealth : MonoBehaviour
 
         if (gameManager != null)
         {
-            gameManager.AddScore(points); // Add points when enemy dies
+            gameManager.AddScore(points,playerID); // Add points when enemy dies
         }
 
         Destroy(gameObject);

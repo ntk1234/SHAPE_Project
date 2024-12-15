@@ -25,6 +25,10 @@ public class GameManager : MonoBehaviour
 
     public CanvasController canvasController; // Reference to the CanvasController script
     public int score = 0; // Score variable
+    
+    public int _1pscore = 0;
+
+    public int _2pscore = 0;
 
     private Coroutine activeSpawnCoroutine; // Track the spawn coroutine
 
@@ -69,6 +73,12 @@ public class GameManager : MonoBehaviour
                 isWaveStartCountdown = false; // End the countdown
                 StartCoroutine(WaveManager()); // Start wave management
             }
+        }
+
+         if (canvasController != null)
+        {
+            score = _1pscore+_2pscore;
+            canvasController.UpdateScoreDisplay(score);
         }
     }
 
@@ -146,48 +156,53 @@ public class GameManager : MonoBehaviour
         }
 
         // Ensure all enemies are cleared before transitioning
-        while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
-        {
+         while (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
+         {
             yield return null;
         }
 
         Debug.Log($"Wave {wave.waveName} fully cleared!");
     }
 
+
     private IEnumerator SpawnEnemies(Wave wave)
+{
+    Dictionary<GameObject, int> activeEnemies = new Dictionary<GameObject, int>();
+    foreach (var enemy in wave.enemies)
     {
-        Dictionary<GameObject, int> activeEnemies = new Dictionary<GameObject, int>();
-        foreach (var enemy in wave.enemies)
-        {
-            activeEnemies[enemy.enemyPrefab] = 0;
-        }
+        activeEnemies[enemy.enemyPrefab] = 0;
+    }
 
-        while (waveInProgress)
+    while (waveInProgress)
+    {
+        foreach (var enemySettings in wave.enemies)
         {
-            foreach (var enemySettings in wave.enemies)
+            int activeCount = CountActiveEnemies(enemySettings.enemyPrefab);
+            activeEnemies[enemySettings.enemyPrefab] = activeCount;
+
+            // Check if the number of active enemies is below the maximum allowed
+            if (activeCount < enemySettings.maxEnemyCount)
             {
-                int activeCount = CountActiveEnemies(enemySettings.enemyPrefab);
-                activeEnemies[enemySettings.enemyPrefab] = activeCount;
+                Vector3 spawnPoint = RandomNavMeshLocation(radius);
 
-                // Check if the number of active enemies is below the maximum allowed
-                if (activeCount < enemySettings.maxEnemyCount)
+                if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
                 {
-                    Vector3 spawnPoint = RandomNavMeshLocation(radius);
+                    // Generate a random index to select a random enemy prefab
+                    int randomIndex = Random.Range(0, wave.enemies.Count);
+                    GameObject enemyPrefab = wave.enemies[randomIndex].enemyPrefab;
 
-                    if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
-                    {
-                        Instantiate(enemySettings.enemyPrefab, spawnPoint, Quaternion.identity);
-                        Debug.Log($"Spawned {enemySettings.enemyPrefab.name}. Active count: {activeCount + 1}/{enemySettings.maxEnemyCount}");
-                    }
+                    Instantiate(enemyPrefab, spawnPoint, Quaternion.identity);
+                    Debug.Log($"Spawned {enemyPrefab.name}. Active count: {activeCount + 1}/{enemySettings.maxEnemyCount}");
                 }
             }
-
-            // Wait for a unified spawn interval
-            yield return new WaitForSeconds(1f);
         }
 
-        Debug.Log("Stopped spawning enemies.");
+        // Wait for a unified spawn interval
+        yield return new WaitForSeconds(1f);
     }
+    Debug.Log($"Wave {wave.waveName} enemies.");
+    Debug.Log("Stopped spawning enemies.");
+}
 
     private int CountActiveEnemies(GameObject enemyPrefab)
     {
@@ -205,14 +220,26 @@ public class GameManager : MonoBehaviour
 
         return Vector3.zero;
     }
+    
 
     // Call this method to add points when an enemy is defeated
-    public void AddScore(int points)
+    public void AddScore(int points,int playerID)
     {
-        score += points;
-        if (canvasController != null)
+        
+
+            if (playerID == 1)
         {
-            canvasController.UpdateScoreDisplay(score);
+            _1pscore += points;
+              Debug.Log($"1P SCORE {_1pscore}");
+        
         }
+        else if (playerID == 2)
+        {
+            _2pscore += points;
+            // 如果需要，更新2P玩家的UI
+              Debug.Log($"2P SCORE {_2pscore}");
+        }
+
+    
     }
 }

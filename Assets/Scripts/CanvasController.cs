@@ -1,16 +1,20 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class CanvasController : MonoBehaviour
 {
-    private GameManager gameManager; // Reference to the GameManager script
+    public GameManager gameManager; // Reference to the GameManager script
+
+    public float turntime ;
 
     [Header("Set Player")]
     public GameObject player1; // Drag and drop the Player 1 GameObject in the Inspector
     public GameObject player2; // Drag and drop the Player 2 GameObject in the Inspector
 
-    private PlayerHealth player1Health;
-    private PlayerHealth player2Health;
+    public PlayerHealth player1Health;
+    public PlayerHealth player2Health;
 
     public CharController cc;
     public CharController1 cc1;
@@ -19,6 +23,12 @@ public class CanvasController : MonoBehaviour
     public Slider player1HpBar;
     public Slider player2HpBar;
     public float hpBarLerpSpeed = 5f; // Speed of the HP bar interpolation
+
+     [Header("Set Mp Bar")]
+    public Slider player1MpBar;
+    public Slider player2MpBar;
+    //public Slider player2MpBar;
+    public float mpBarLerpSpeed = 5f; // Speed of the HP bar interpolation
 
     [Header("Set Score Text")]
     public Text scoreText; // Reference to the Text component to display the score
@@ -29,8 +39,7 @@ public class CanvasController : MonoBehaviour
 
     [Header("Experience Display")]
     public Text exptext; // Text element to display experience or coins
-    public Text kickcdtext;
-    public Text hkickcdtext;
+
     public Expupdate expupdate; // Reference to the Expupdate script
     public GameObject gm; // GameManager or related object holding Expupdate
 
@@ -43,8 +52,25 @@ public class CanvasController : MonoBehaviour
     [Header("Win Game")]
     public GameObject winGameUI;
 
+    public Text _1pAllScore;
+    public Text _2pAllScore;
+    
+    public Text grade;
+    public Text _1pTitle;
+    public Text _2pTitle;
+
+    public string _1pstr=" ";
+     public string _2pstr=" ";
+
+     public string _1pIslive_str=" ";
+     public string _2pIslive_str=" ";
+
     [Header("Shop Menu")]
     public GameObject shopMenuUI;
+
+
+
+   
 
     void Start()
     {
@@ -63,10 +89,19 @@ public class CanvasController : MonoBehaviour
         if (player1 != null)
         {
             player1Health = player1.GetComponent<PlayerHealth>();
+
+          
             if (player1Health != null)
             {
                 player1HpBar.maxValue = player1Health.maxHealth; // Set slider max value
                 player1HpBar.value = player1Health.currentHealth; // Initialize with current health
+            }
+
+            
+            if (cc != null)
+            {
+                player1MpBar.maxValue = cc.maxMp; // Set slider max value
+                player1MpBar.value = cc.currMp; // Initialize with current health
             }
         }
 
@@ -77,6 +112,12 @@ public class CanvasController : MonoBehaviour
             {
                 player2HpBar.maxValue = player2Health.maxHealth; // Set slider max value
                 player2HpBar.value = player2Health.currentHealth; // Initialize with current health
+            }
+
+             if (cc != null)
+            {
+                player2MpBar.maxValue = cc1.maxMp; // Set slider max value
+                player2MpBar.value = cc1.currMp; // Initialize with current health
             }
         }
 
@@ -90,6 +131,11 @@ public class CanvasController : MonoBehaviour
             countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
             isCountingDown = true; // Begin the countdown
         }
+        // if (player1 != null)
+       // {
+           
+       // }
+
 
         // Initialize score display
         UpdateScoreDisplay(0); // Assuming the initial score is 0
@@ -97,6 +143,7 @@ public class CanvasController : MonoBehaviour
 
     void Update()
     {
+
         // Smoothly update the health bars based on the players' current health
         if (player1Health != null)
         {
@@ -108,21 +155,21 @@ public class CanvasController : MonoBehaviour
             player2HpBar.value = Mathf.Lerp(player2HpBar.value, player2Health.currentHealth, Time.deltaTime * hpBarLerpSpeed);
         }
 
+         if (cc!= null)
+        {
+            player1MpBar.value = Mathf.Lerp(player1MpBar.value, cc.currMp,Time.deltaTime * mpBarLerpSpeed);
+        }
+
+         if (cc1!= null)
+        {
+            player2MpBar.value = Mathf.Lerp(player2MpBar.value, cc1.currMp,Time.deltaTime * mpBarLerpSpeed);
+        }
         // Update the experience text
         if (exptext != null && expupdate != null)
         {
             exptext.text = "Coins: " + expupdate.currentExp.ToString();
         }
-        // Update the experience text
-        if (kickcdtext != null && cc != null)
-        {
-            kickcdtext.text = "1p Kick Cd: " + Mathf.FloorToInt(cc.kickTimer).ToString();
-        }
-
-        if (hkickcdtext != null && cc != null)
-        {
-            hkickcdtext.text = "H Kick Cd: " + Mathf.FloorToInt(cc.hkickTimer).ToString();
-        }
+       
         // Countdown logic for wave timer
         if (isCountingDown)
         {
@@ -152,6 +199,9 @@ public class CanvasController : MonoBehaviour
                 PauseGame();
             }
         }
+
+        turntime+=Time.deltaTime;
+       
     }
 
     public void UpdateScoreDisplay(int _score)
@@ -208,6 +258,67 @@ public class CanvasController : MonoBehaviour
         winGameUI.SetActive(true); // Show the pause menu
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
+
+
+        if(turntime<=120f)
+        {
+            grade.text="S";
+        }
+        else if(turntime<=180f)
+        {
+            grade.text="A";
+        }
+        else if(turntime<=200f)
+        {
+            grade.text="B";
+        }
+        else
+        {
+           grade.text="C"; 
+        }
+
+
+        _1pAllScore.text = "Score: " + gameManager._1pscore.ToString();
+        _2pAllScore.text = "Score: " + gameManager._2pscore.ToString();
+        
+        
+         if (gameManager._1pscore > gameManager._2pscore)
+        {
+                Debug.Log("Player 1's score is higher. AAA");
+                _1pstr="top scorer";
+        }
+        else if (gameManager._2pscore > gameManager._1pscore)
+        {
+                Debug.Log("Player 2's score is higher. AAA");
+                _2pstr="top scorer";
+        }
+        else
+        {
+                Debug.Log("Both players have the same score. AAA");
+                _1pstr="";
+                _2pstr="";
+        }
+
+        if(player1==null)
+        {
+            _1pIslive_str = "Death!!!";
+        }
+        else{
+            _1pIslive_str ="Survived!!";
+        }
+
+        if(player2==null)
+        {
+            _2pIslive_str = "Death!!!";
+        }
+        else{
+            _2pIslive_str ="Survived!!";
+        }
+
+
+
+        _1pTitle.text = _1pIslive_str +"\n"+ _1pstr;
+        _2pTitle.text = _2pIslive_str +"\n"+ _2pstr;
     }
 
 

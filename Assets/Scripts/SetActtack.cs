@@ -26,6 +26,7 @@ public class SetActtack : MonoBehaviour
     public void ActivateKickHitbox()
     {
         kickbox.SetActive(true);
+        
     }
     public void DeactivateKickHitbox()
     {

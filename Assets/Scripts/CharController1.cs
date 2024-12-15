@@ -25,6 +25,11 @@ public class CharController1 : MonoBehaviour
     public bool isPunch = false;
 
     public bool isKick = false;
+
+      public int maxMp = 10;
+
+        public int currMp ;
+        public int kickMp = 5;
  
     // Start is called before the first frame update
     void Start()
@@ -34,11 +39,15 @@ public class CharController1 : MonoBehaviour
 
         kickTimer = kickRate;
        fightTimer = fightRate;
+      
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        currMp = Mathf.Clamp(currMp,0,maxMp);
+
          float h = 0;
         float v = 0;
 
@@ -76,22 +85,30 @@ public class CharController1 : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, newRotation, rotSpeed * Time.deltaTime);
         }
 
-       
-        if (Input.GetKeyDown("b")&& fightTimer >= fightRate)
+       if (fightTimer >= fightRate)
+         {
+            fightTimer=fightRate;
+        }
+        if (Input.GetKeyDown("b")&& fightTimer >= fightRate&&!isPunch&&!isKick)
         {
-           // isPunch=true;
+           isPunch=true;
             animator.SetTrigger("punch");
             fightTimer=0;
         } 
-
-        if (Input.GetKeyDown("n") && kickTimer >= kickRate)//踢撃條件達成
+          if (kickTimer >= kickRate)
+         {
+            kickTimer=kickRate;
+         }
+        if (Input.GetKeyDown("n") && kickTimer >= kickRate&&!isPunch&&!isKick&&currMp>=kickMp)//踢撃條件達成
         {
             
-           // isKick=true;
+           isKick=true;
+           currMp-=kickMp;
             animator.SetTrigger("kick");
             kickTimer = 0f;
             
         }
+         
 
        // if (Input.GetKeyDown("l") && hkickTimer >= hkickRate)//踢撃條件達成
        // {
