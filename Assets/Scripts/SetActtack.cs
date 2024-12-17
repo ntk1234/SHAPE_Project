@@ -8,6 +8,11 @@ public class SetActtack : MonoBehaviour
     
     public CharController cc;
     public CharController1 cc1;
+    
+    
+    public TwoPshoot ts;
+
+    public GameObject firepont;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +21,8 @@ public class SetActtack : MonoBehaviour
         cc = GetComponent<CharController>();
             
         cc1= GetComponent<CharController1>();
+      if(ts!=null) { 
+        ts=firepont.GetComponent<TwoPshoot>();}
     }
 
     // Update is called once per frame
@@ -75,4 +82,15 @@ public class SetActtack : MonoBehaviour
         hitbox.SetActive(false);
         cc1.isPunch=false;
     }
+    
+      public void CallMG()
+        {
+            ts.isFire = true;
+        }
+
+           public void CloseMG()
+        {
+            cc1.isMg=false;
+        }
+   
 }

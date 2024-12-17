@@ -21,25 +21,36 @@ public class CharController1 : MonoBehaviour
      public float fightRate = 1f;            // 打撃頻率
         public  float fightTimer;  
                         // 打撃計時器
+    
+       public float mgRate = 1f;            // 打撃頻率
+        public  float mgTimer;  
 
     public bool isPunch = false;
 
     public bool isKick = false;
 
+    public bool isMg = false;
+
       public int maxMp = 10;
 
         public int currMp ;
         public int kickMp = 5;
+
+        public int mgMp = 10;
+
+        public Shop shop;
+
+
  
     // Start is called before the first frame update
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-
+          shop = GameObject.Find("GameManger").GetComponent<Shop>();
         kickTimer = kickRate;
        fightTimer = fightRate;
-      
+       mgTimer = mgRate;
     }
 
     // Update is called once per frame
@@ -79,6 +90,8 @@ public class CharController1 : MonoBehaviour
 
         fightTimer += Time.deltaTime;//打撃時間器運作
 
+         mgTimer += Time.deltaTime;//打撃時間器運作
+
         if (moveDirection != Vector3.zero)
         {
             Quaternion newRotation = Quaternion.LookRotation(moveDirection);
@@ -89,7 +102,7 @@ public class CharController1 : MonoBehaviour
          {
             fightTimer=fightRate;
         }
-        if (Input.GetKeyDown("b")&& fightTimer >= fightRate&&!isPunch&&!isKick)
+        if (Input.GetKeyDown("b")&& fightTimer >= fightRate&&!isPunch&&!isKick&&!isMg)
         {
            isPunch=true;
             animator.SetTrigger("punch");
@@ -99,7 +112,7 @@ public class CharController1 : MonoBehaviour
          {
             kickTimer=kickRate;
          }
-        if (Input.GetKeyDown("n") && kickTimer >= kickRate&&!isPunch&&!isKick&&currMp>=kickMp)//踢撃條件達成
+        if (Input.GetKeyDown("n") && kickTimer >= kickRate&&!isPunch&&!isKick&&!isMg&&currMp>=kickMp)//踢撃條件達成
         {
             
            isKick=true;
@@ -110,13 +123,16 @@ public class CharController1 : MonoBehaviour
         }
          
 
-       // if (Input.GetKeyDown("l") && hkickTimer >= hkickRate)//踢撃條件達成
-       // {
-            
-        //    animator.SetTrigger("hkick");
-      //      hkickTimer = 0f;
-            
-       // }
+        if (Input.GetKeyDown("m") && mgTimer >= mgRate&&!isPunch&&!isKick&&!isMg&&shop.isBuymg&&currMp>=mgMp)// &&currMp>=mgMp
+        {
+             isMg=true;
+           currMp-=mgMp;
+            animator.SetTrigger("mg");
+          mgTimer = 0f;
+           
+        }
+
+    
 
         
     }
