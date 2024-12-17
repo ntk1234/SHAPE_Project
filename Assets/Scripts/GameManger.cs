@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 
                 if (!iswingame && GameObject.FindGameObjectsWithTag("Enemy").Length == 0) // Check if it's the first wave
                 {
-                    Debug.Log("First wave completed! Transitioning to the shop menu.");
+                    Debug.Log("wave completed! Transitioning to the shop menu.");
                     canvasController.CallShopMenu();
                 }
 
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
             {
                 waveInProgress = false;
                 Debug.Log($"Wave {wave.waveName} Completed!");
-
+                canvasController.CleareEnemyText();
                 // Stop the active spawn coroutine
                 if (activeSpawnCoroutine != null)
                 {

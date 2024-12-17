@@ -213,13 +213,16 @@ public class CanvasController : MonoBehaviour
     }
 
     public void SendWaveText()
-
     {
 
         waveTimerText.text = countdownTimer > 0
         ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
         : "Wave in Progress!";
+    }
 
+    public void CleareEnemyText()
+    {
+        waveTimerText.text = "Cleare The Enemy !";
     }
 
     // Method to start the countdown for the next wave
