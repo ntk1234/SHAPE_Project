@@ -9,6 +9,9 @@ public class CanvasController : MonoBehaviour
 
     public float turntime ;
 
+    [Header("Set HUD")]
+    public GameObject hUD;
+
     [Header("Set Player")]
     public GameObject player1; // Drag and drop the Player 1 GameObject in the Inspector
     public GameObject player2; // Drag and drop the Player 2 GameObject in the Inspector
@@ -37,8 +40,8 @@ public class CanvasController : MonoBehaviour
     public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
     private bool isPaused = false;
 
-    [Header("Experience Display")]
-    public Text exptext; // Text element to display experience or coins
+    [Header("Coin Display")]
+    public Text coinText; // Text element to display experience or coins
 
     public Expupdate expupdate; // Reference to the Expupdate script
     public GameObject gm; // GameManager or related object holding Expupdate
@@ -165,9 +168,9 @@ public class CanvasController : MonoBehaviour
             player2MpBar.value = Mathf.Lerp(player2MpBar.value, cc1.currMp,Time.deltaTime * mpBarLerpSpeed);
         }
         // Update the experience text
-        if (exptext != null && expupdate != null)
+        if (coinText != null && expupdate != null)
         {
-            exptext.text = "Coins: " + expupdate.currentExp.ToString();
+            coinText.text = "Coins: " + expupdate.currentExp.ToString();
         }
        
         // Countdown logic for wave timer
@@ -310,6 +313,7 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f; // Freeze the game
+        hUD.SetActive(false);
         shopMenuUI.SetActive(true); // Show the pause menu
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
@@ -319,6 +323,7 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = true;
         Time.timeScale = 0f; // Freeze the game
+        hUD.SetActive(false);
         pauseMenuUI.SetActive(true); // Show the pause menu
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
@@ -328,6 +333,7 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume the game
+        hUD.SetActive(true);
         if (pauseMenuUI.activeSelf == true)
         {
             pauseMenuUI.SetActive(false);
