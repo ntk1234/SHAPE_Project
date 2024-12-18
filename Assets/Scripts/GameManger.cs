@@ -113,6 +113,7 @@ public class GameManager : MonoBehaviour
                 {
                     yield return null;
                 }
+
                
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
                  
@@ -144,6 +145,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator StartWave(Wave wave)
     {
+       
+        
         Debug.Log($"Starting Wave: {wave.waveName}");
 
         // Start centralized spawn coroutine
@@ -174,6 +177,7 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"Wave {wave.waveName} fully cleared!");
+       
     }
 
 

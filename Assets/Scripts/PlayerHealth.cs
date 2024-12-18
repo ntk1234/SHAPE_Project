@@ -9,7 +9,13 @@ public class PlayerHealth : MonoBehaviour
     public float damageCooldown = 0.5f; // Cooldown time for taking damage
     private float damageCooldownTimer = 0f; // Timer for damage cooldown
 
-    
+     public float def = 0 ; 
+
+     public float defTimer;
+
+     public float defRate=5f;
+
+     public bool isdefup=false;
 
     void Start()
     {
@@ -22,8 +28,17 @@ public class PlayerHealth : MonoBehaviour
         {
             damageCooldownTimer -= Time.deltaTime;
         }
-
-        
+        if(isdefup){
+         defTimer += Time.deltaTime;
+        }
+        if (defTimer >= defRate&&isdefup)
+         {
+            def -= 50f;
+            defTimer=0;
+             Debug.Log($"Player defdown. def: {def}");
+            isdefup=false;
+            
+        }
     }
 
     public void Heal(float amount)
@@ -33,11 +48,19 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Player healed. Current health: {currentHealth}");
     }
 
+    public void DefUP(float amount)
+    {   
+        isdefup=true;
+        def += amount;
+        Debug.Log($"Player defup. def: {def}");
+        
+    }
+    
     public void TakeDamage(int damage)
     {
         if (damageCooldownTimer <= 0)
         {
-            currentHealth -= damage;
+            currentHealth -= damage-def;
             damageCooldownTimer = damageCooldown; // Start the damage cooldown
 
             if (currentHealth <= 0f)
