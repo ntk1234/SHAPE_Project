@@ -275,11 +275,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054443854213d9346b07e5092de5e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerID: 0
   maxHealth: 50
   currentHealth: 0
   damage: 5
   exp: 20
+  points: 10
   expUpdate: {fileID: 0}
+  exprate: 0.5
   lootObjects:
   - prefab: {fileID: 8465656554721108770, guid: 2109c74deb5b2ed4caf883e1ef7359d6, type: 3}
     dropChance: 0.25

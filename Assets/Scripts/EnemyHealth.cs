@@ -28,6 +28,8 @@ public class EnemyHealth : MonoBehaviour
     public int points = 10;
     public Expupdate expUpdate;
 
+    public float exprate=0.5f;
+
     [Header("Loot Settings")]
     public List<LootItem> lootObjects = new List<LootItem>();
 
@@ -86,7 +88,7 @@ public class EnemyHealth : MonoBehaviour
         Debug.Log("Enemy defeated and gained EXP!");
 
         // Grant EXP
-        if (Random.value < 0.5f)
+        if (Random.value < exprate)
         {
             expUpdate.currentExp += exp;
         }
@@ -132,7 +134,7 @@ public class EnemyHealth : MonoBehaviour
 
         foreach (SkinnedMeshRenderer renderer in skinnedMeshRenderers)
         {
-            renderer.material.color = originalColor;
+            renderer.material.color = Color.white;
         }
     }
 }

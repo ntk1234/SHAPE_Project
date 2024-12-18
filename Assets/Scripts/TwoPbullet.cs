@@ -8,6 +8,8 @@ public class TwoPbullet : MonoBehaviour
 
 
     public int damage = 20;
+
+    public float destroytime = 0.2f;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,7 @@ public class TwoPbullet : MonoBehaviour
         if (eh != null)
         {
             eh.TakeDamage(damage);
-            Destroy(gameObject,0.2f);
+            Destroy(gameObject,destroytime);
         }
 
         }
