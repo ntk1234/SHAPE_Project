@@ -132,15 +132,12 @@ public class GameManager : MonoBehaviour
                     canvasController.StartNewWaveCountdown(waveTimer);
                 }
             }
-           else if (!waveInProgress && currentWaveIndex ==  waves.Count-1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && score >= waves[currentWaveIndex].targetScore && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
-                Debug.Log("All waves completed and all enemies destroyed. You win!");
+                Debug.Log("All waves completed, target score achieved, and all enemies destroyed. You win!");
                 iswingame = true;
                 canvasController.WinGame();
-
-                
             }
-
             yield return null;
         }
     }
