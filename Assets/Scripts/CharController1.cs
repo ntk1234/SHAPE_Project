@@ -47,10 +47,10 @@ public class CharController1 : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
-          shop = GameObject.Find("GameManger").GetComponent<Shop>();
+        shop = GameObject.Find("GameManger").GetComponent<Shop>();
         kickTimer = kickRate;
-       fightTimer = fightRate;
-       mgTimer = mgRate;
+        fightTimer = fightRate;
+        mgTimer = mgRate;
     }
 
     // Update is called once per frame

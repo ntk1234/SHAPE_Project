@@ -512,6 +512,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1602243420}
     - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
+      propertyPath: shop
+      value: 
+      objectReference: {fileID: 2032796717}
+    - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
       propertyPath: firepont
       value: 
       objectReference: {fileID: 1602243418}
@@ -531,6 +535,7 @@ GameObject:
   - component: {fileID: 2032796715}
   - component: {fileID: 2032796714}
   - component: {fileID: 2032796716}
+  - component: {fileID: 2032796717}
   m_Layer: 0
   m_Name: gm
   m_TagString: Untagged
@@ -603,6 +608,31 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &2032796717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2032796713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d7ba0097919b8499d28df703fb4f7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hkick_prices: 100
+  smallheal_prices: 20
+  mg_prices: 100
+  hkickcdtext: {fileID: 0}
+  mgtext: {fileID: 0}
+  isBuyhkick: 0
+  isBuymg: 0
+  ph: {fileID: 0}
+  ph2: {fileID: 0}
+  eud: {fileID: 0}
+  buyhkButton: {fileID: 0}
+  buySmallBtn: {fileID: 0}
+  buymgBtn: {fileID: 0}
 --- !u!1001 &3844983523979890960
 PrefabInstance:
   m_ObjectHideFlags: 0

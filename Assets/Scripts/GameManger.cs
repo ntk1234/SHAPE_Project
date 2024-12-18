@@ -10,11 +10,15 @@ public class GameManager : MonoBehaviour
     private GameObject player;
     private bool iswingame = false;
 
+    public bool isStopSpwan = false;
+
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
     public float timeBetweenWaves = 10f; // Delay between waves
     private int currentWaveIndex = -1;
     private bool waveInProgress = false;
+
+   
     public List<Wave> waves; // List of waves
 
     private float waveTimer; // Timer for the wave countdown
@@ -64,6 +68,9 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         // Manage the wave timer countdown
+
+    
+        if(!isStopSpwan){
         if (isWaveStartCountdown)
         {
             waveTimer -= Time.deltaTime;
@@ -75,12 +82,14 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(WaveManager()); // Start wave management
             }
         }
+        }
 
          if (canvasController != null)
         {
             score = _1pscore+_2pscore;
             canvasController.UpdateScoreDisplay(score);
         }
+        
     }
 
     public float GetWaveTimer()
@@ -90,10 +99,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WaveManager()
     {
+        
         while (true)
         {
-            if (!waveInProgress && currentWaveIndex < waves.Count - 1)
+            
+            if (!waveInProgress && currentWaveIndex < waves.Count-1 )
             {
+               
                 currentWaveIndex++;
                 waveInProgress = true;
                 canvasController.SendWaveText();
@@ -101,9 +113,9 @@ public class GameManager : MonoBehaviour
                 {
                     yield return null;
                 }
-
+               
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
-
+                 
                 // Wait for timeBetweenWaves after the wave ends
                 waveTimer = timeBetweenWaves;
                 isWaveStartCountdown = true;
@@ -113,18 +125,20 @@ public class GameManager : MonoBehaviour
                     Debug.Log("wave completed! Transitioning to the shop menu.");
                     canvasController.CallShopMenu();
                 }
-
+             
                 // Notify the CanvasController to restart the wave countdown
                 if (canvasController != null)
                 {
                     canvasController.StartNewWaveCountdown(waveTimer);
                 }
             }
-            else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+           else if (!waveInProgress && currentWaveIndex ==  waves.Count-1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
                 Debug.Log("All waves completed and all enemies destroyed. You win!");
                 iswingame = true;
                 canvasController.WinGame();
+
+                
             }
 
             yield return null;
@@ -212,6 +226,8 @@ public class GameManager : MonoBehaviour
 
     private Vector3 RandomNavMeshLocation(float radius)
     {
+       
+       
         Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
 
         if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
