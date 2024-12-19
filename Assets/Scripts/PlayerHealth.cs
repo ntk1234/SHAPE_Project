@@ -40,7 +40,8 @@ public class PlayerHealth : MonoBehaviour
             def -= 50f;
             defTimer=0;
              Debug.Log($"Player defdown. def: {def}");
-            defeffect.SetActive(false);
+           defeffect.SetActive(false);
+          
             isdefup=false;
             
         }
@@ -60,7 +61,8 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log($"Player defup. def: {def}");
         if (defeffect != null)
         {
-             defeffect.SetActive(true);
+            defeffect.SetActive(true);
+         
         }
         
     }

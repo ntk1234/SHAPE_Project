@@ -97,12 +97,7 @@ public class GameManager : MonoBehaviour
                 // Notify the CanvasController to restart the wave countdown
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
             }
-            else if (!waveInProgress && currentWaveIndex == waves.Count - 1 && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-            {
-                Debug.Log("All waves completed and all enemies destroyed. You win!");
-                iswingame = true;
-                canvasController.WinGame();
-            }
+           
             //yield return null;
         }
     }
@@ -130,10 +125,19 @@ public class GameManager : MonoBehaviour
             {
                 waveInProgress = false;
                 Debug.Log($"Wave {wave.waveName} Completed! Transitioning to the shop menu.");
+                
                 CallWaveUI();
+
+                if (!waveInProgress && currentWaveIndex == waves.Count - 1)
+                    {
+                        Debug.Log("All waves completed and all enemies destroyed. You win!");
+                        iswingame = true;
+                        canvasController.WinGame();
+                    }
+                    else{
                 canvasController.CallShopMenu();
                 yield return new WaitForSeconds(timeBetweenWaves);
-                isWaveStartCountdown = true;
+                isWaveStartCountdown = true;}
             }
 
             yield return null;
