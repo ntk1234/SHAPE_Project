@@ -50,28 +50,13 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         waveTimer = startWaveTime; // Initialize the wave timer
-
         // Start the initial wave countdown in the CanvasController
         if (canvasController != null)
         {
             canvasController.StartNewWaveCountdown(waveTimer);
         }
-    }
-
-    void Update()
-    {
-        // Manage the wave timer countdown
-        if (isWaveStartCountdown)
-        {
-            waveTimer -= Time.deltaTime;
-
-            if (waveTimer <= 0)
-            {
-                //waveTimer = 0; // Clamp the timer to 0
-                isWaveStartCountdown = false; // End the countdown
-                StartCoroutine(WaveManager()); // Start wave management
-            }
-        }
+        new WaitForSeconds(timeBetweenWaves);
+        StartCoroutine(WaveManager());
     }
 
     public float GetWaveTimer()
@@ -91,14 +76,9 @@ public class GameManager : MonoBehaviour
                 {
                     yield return null;
                 }
-                // Wait for timeBetweenWaves after the wave ends     
-                           
-
                 // Notify the CanvasController to restart the wave countdown
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
             }
-           
-            //yield return null;
         }
     }
 
@@ -129,17 +109,18 @@ public class GameManager : MonoBehaviour
                 CallWaveUI();
 
                 if (!waveInProgress && currentWaveIndex == waves.Count - 1)
-                    {
-                        Debug.Log("All waves completed and all enemies destroyed. You win!");
-                        iswingame = true;
-                        canvasController.WinGame();
-                    }
-                    else{
+                {
+                    Debug.Log("All waves completed and all enemies destroyed. You win!");
+                    iswingame = true;
+                    canvasController.WinGame();
+                }
+                else
+                {
                 canvasController.CallShopMenu();
                 yield return new WaitForSeconds(timeBetweenWaves);
-                isWaveStartCountdown = true;}
+                WaveManager();
+                }
             }
-
             yield return null;
         }
     }
@@ -171,14 +152,11 @@ public class GameManager : MonoBehaviour
 
         return Vector3.zero;
     }
-    
 
     // Call this method to add points when an enemy is defeated
     public void AddScore(int points,int playerID)
     {
-        
-
-            if (playerID == 1)
+        if (playerID == 1)
         {
             _1pscore += points;
               Debug.Log($"1P SCORE {_1pscore}");
