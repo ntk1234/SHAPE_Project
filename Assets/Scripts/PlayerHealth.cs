@@ -17,9 +17,13 @@ public class PlayerHealth : MonoBehaviour
 
      public bool isdefup=false;
 
+    public GameObject defeffect;
+
+
     void Start()
     {
         currentHealth = maxHealth;
+        defeffect.SetActive(false);
     }
 
     void Update()
@@ -36,6 +40,7 @@ public class PlayerHealth : MonoBehaviour
             def -= 50f;
             defTimer=0;
              Debug.Log($"Player defdown. def: {def}");
+            defeffect.SetActive(false);
             isdefup=false;
             
         }
@@ -53,6 +58,10 @@ public class PlayerHealth : MonoBehaviour
         isdefup=true;
         def += amount;
         Debug.Log($"Player defup. def: {def}");
+        if (defeffect != null)
+        {
+             defeffect.SetActive(true);
+        }
         
     }
     
