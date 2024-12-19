@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 525728520574129957}
   - component: {fileID: 2381253202758501271}
   - component: {fileID: 4586465027924437130}
+  - component: {fileID: 8502432147146425114}
   - component: {fileID: 8254194966426570091}
   - component: {fileID: 6210626880415290523}
   - component: {fileID: 6482185667960571973}
@@ -55,7 +56,7 @@ MeshRenderer:
   m_GameObject: {fileID: 1503102670821561345}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -88,6 +89,32 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8502432147146425114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1503102670821561345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054443854213d9346b07e5092de5e169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerID: 0
+  maxHealth: 50
+  currentHealth: 0
+  damage: 10
+  exp: 10
+  points: 10
+  expUpdate: {fileID: 0}
+  exprate: 0.5
+  lootObjects: []
+  originalMaterial: {fileID: 0}
+  flashMaterial: {fileID: 0}
+  flashDuration: 0.7
+  skinnedMeshRenderers: []
+  cubes: []
 --- !u!65 &8254194966426570091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -315,8 +342,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffcd9413701382c4ab2b2b3fc9a45167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 34
   ps: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   boss: {fileID: 1503102670821561345}
   naiboss: {fileID: 6210626880415290523}
-  explosionDelay: 2
+  explosionDelay: 5

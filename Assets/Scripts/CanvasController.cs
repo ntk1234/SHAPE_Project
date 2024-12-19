@@ -217,7 +217,6 @@ public class CanvasController : MonoBehaviour
 
     public void SendWaveText()
     {
-
         waveTimerText.text = countdownTimer > 0
         ? $"Next Wave In: {Mathf.CeilToInt(countdownTimer)}s"
         : "Wave in Progress!";
