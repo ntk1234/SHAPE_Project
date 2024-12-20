@@ -77,6 +77,9 @@ public class CanvasController : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Cursor.visible = false; // Hide the cursor
+
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
 
         cc = player1.GetComponent<CharController>();
