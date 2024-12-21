@@ -7,16 +7,19 @@ public class NavMeshAi_Boss: MonoBehaviour
 {
     private NavMeshAgent agent;
 
-  //  private Animator animator;
+   private Animator animator;
     public Transform[] targets;
     private Transform currentTarget;
     
-    public GameObject bhitbox;
+    public GameObject bhitbox,remark,ps;
 
+    private GameObject explosionInstance;
+
+    public bool isstop =false;
     void Start()
     {
 
-       // animator = GetComponent<Animator>();
+       animator = GetComponent<Animator>();
         GameObject[] playerObjects = GameObject.FindGameObjectsWithTag("Player");
         targets = new Transform[playerObjects.Length];
         for (int i = 0; i < playerObjects.Length; i++)
@@ -27,6 +30,7 @@ public class NavMeshAi_Boss: MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         bhitbox.SetActive(false);
+        remark.SetActive(false);
     }
 
                 void Update()
@@ -40,22 +44,30 @@ public class NavMeshAi_Boss: MonoBehaviour
                 if (currentTarget != null && agent.isOnNavMesh)
                 {
                     
-                    
-                    agent.destination = currentTarget.position;
+                    if(!isstop){
+                    animator.SetFloat("speed",1);
+                  
+                    agent.destination = currentTarget.position;}
 
-                    if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance+2)
+                    if (Vector3.Distance(transform.position, currentTarget.position) <= agent.stoppingDistance+1)
                     {
-                    
-                      enemyAttackBoom();
+                        isstop=true;
+                        animator.SetFloat("speed",0); 
+                        animator.SetTrigger("bossAttack");
+                       
+                       
                     }
 
                      if (Vector3.Distance(transform.position, currentTarget.position) > 5f)
                     {
+                        isstop =false;
+                      // animator.SetFloat("speed",0); 
                         FindNextTarget();
                     }
-             
-                }
 
+
+                }
+                 
                 
                
             }
@@ -100,15 +112,40 @@ public class NavMeshAi_Boss: MonoBehaviour
 
            public void enemyAttackBoom()
            {
+           
             bhitbox.SetActive(true);
+    
+           }
+            public void enemyAttackBoomArea()
+           {
+           
+             remark.SetActive(true);
     
            }
 
            public void enemyAttackBoomEnd()
            {
             bhitbox.SetActive(false);
+            
     
            }
 
+              public void enemyAttackBoomAreaEnd()
+           {
+           
+             remark.SetActive(false);
+    
+           }
+
+        public void PlayExplosionEffect()
+        {
+            if (ps != null)
+            {
+                explosionInstance = Instantiate(ps, transform.position, Quaternion.identity); // 在Boss位置實例化爆炸特效
+                Destroy(explosionInstance, 3f);
+            }
+            
+        
+        }
  
 }
