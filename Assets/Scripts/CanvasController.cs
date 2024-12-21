@@ -246,6 +246,7 @@ public class CanvasController : MonoBehaviour
     public void WinGame()
     {
         Time.timeScale = 0f; // Freeze the game
+        hUD.SetActive(false);
         winGameUI.SetActive(true); // Show the pause menu
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible

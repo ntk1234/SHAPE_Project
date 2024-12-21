@@ -15,11 +15,16 @@ public class Hitpower : MonoBehaviour
 
     public CharController1 cc1;
 
+    public AudioClip AudioEffect;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        
-            if(player1 != null)
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = AudioEffect;
+
+        if (player1 != null)
             {
                 cc = player1.GetComponent<CharController>();
             }
@@ -50,13 +55,15 @@ public class Hitpower : MonoBehaviour
          if (cc!=null&&collision.gameObject.CompareTag("Enemy")&&cc.isPunch)
         {
             cc.currMp+= 1;
-              Debug.Log($"1pEng{cc.currMp}");
+            audioSource.Play();
+            Debug.Log($"1pEng{cc.currMp}");
         }
 
          if (cc1!=null&&collision.gameObject.CompareTag("Enemy")&&cc1.isPunch)
         {
             cc1.currMp+= 1;
-             Debug.Log($"2pEng{cc1.currMp}");
+            audioSource.Play();
+            Debug.Log($"2pEng{cc1.currMp}");
         }
         
     }

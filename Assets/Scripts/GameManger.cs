@@ -101,6 +101,7 @@ public class GameManager : MonoBehaviour
         // Wait until all enemies are defeated
         while (waveInProgress)
         {
+            yield return new WaitForSeconds(1f);
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
                 waveInProgress = false;

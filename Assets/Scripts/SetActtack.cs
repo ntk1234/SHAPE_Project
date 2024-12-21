@@ -8,16 +8,18 @@ public class SetActtack : MonoBehaviour
     
     public CharController cc;
     public CharController1 cc1;
-    
-    
+    public AudioClip swingAudio;
+
     public TwoPshoot ts;
 
     public GameObject firepont;
 
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-    
+        audioSource = GetComponent<AudioSource>();
         cc = GetComponent<CharController>();
             
         cc1= GetComponent<CharController1>();
@@ -33,7 +35,8 @@ public class SetActtack : MonoBehaviour
     public void ActivateKickHitbox()
     {
         kickbox.SetActive(true);
-        
+        audioSource.clip = swingAudio;
+        audioSource.Play();
     }
     public void DeactivateKickHitbox()
     {
@@ -44,6 +47,8 @@ public class SetActtack : MonoBehaviour
      public void ActivateHKickHitbox()
     {
         hkickbox.SetActive(true);
+        audioSource.clip = swingAudio;
+        audioSource.Play();
     }
     public void DeactivateHKickHitbox()
     {
@@ -51,21 +56,24 @@ public class SetActtack : MonoBehaviour
         cc.isHKick=false;
     }
 
-      public void ActivatePunchHitbox2()
+    public void ActivatePunchHitbox2()
     {
         hitbox.SetActive(true);
+        audioSource.clip = swingAudio;
+        audioSource.Play();
     }
     public void DeactivatePunchHitbox2()
     {
         hitbox.SetActive(false);
         cc.isPunch=false;
-        Debug.Log("isPunch=false");
     }
 
 
      public void ActivateKickHitbox2P()
     {
         kickbox.SetActive(true);
+        audioSource.clip = swingAudio;
+        audioSource.Play();
     }
     public void DeactivateKickHitbox2P()
     {
@@ -76,6 +84,8 @@ public class SetActtack : MonoBehaviour
       public void ActivatePunchHitbox2_2P()
     {
         hitbox.SetActive(true);
+        audioSource.clip = swingAudio;
+        audioSource.Play();
     }
     public void DeactivatePunchHitbox2_2p()
     {
@@ -83,14 +93,15 @@ public class SetActtack : MonoBehaviour
         cc1.isPunch=false;
     }
     
-      public void CallMG()
-        {
-            ts.isFire = true;
-        }
+    public void CallMG()
+    {
+        ts.isFire = true;
+        audioSource.clip = swingAudio;
+        audioSource.Play();
+    }
 
-           public void CloseMG()
-        {
-            cc1.isMg=false;
-        }
-   
+    public void CloseMG()
+    {
+        cc1.isMg=false;
+    }  
 }
