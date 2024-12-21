@@ -2286,6 +2286,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581228404}
   m_CullTransparentMesh: 1
+--- !u!1001 &602002079
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1503102670821561345, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
+      propertyPath: m_Name
+      value: 'teatcube '
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
 --- !u!1 &615274420
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,7 +3884,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.0000000033266034, z: 0.0000000027271623, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5421,11 +5478,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594722395}
   m_CullTransparentMesh: 1
---- !u!4 &1630181543 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-  m_PrefabInstance: {fileID: 1938761442}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1638185516
 GameObject:
   m_ObjectHideFlags: 0
@@ -6619,7 +6671,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937108667}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.0000000033266034, z: 0.0000000027271623, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6627,67 +6679,6 @@ Transform:
   - {fileID: 1844623953}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1938761442
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8931455057006741309}
-    m_Modifications:
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.55
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 525728520574129957, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1503102670821561345, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_Name
-      value: 'teatcube '
-      objectReference: {fileID: 0}
-    - target: {fileID: 6482185667960571973, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
 --- !u!1 &1994016974
 GameObject:
   m_ObjectHideFlags: 0
@@ -12212,7 +12203,6 @@ Transform:
   - {fileID: 8931455057006727795}
   - {fileID: 8931455057006751263}
   - {fileID: 8931455057006726723}
-  - {fileID: 1630181543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8931455057006741993
@@ -23729,3 +23719,4 @@ SceneRoots:
   - {fileID: 2034166695}
   - {fileID: 1638613605}
   - {fileID: 8931455057006741309}
+  - {fileID: 602002079}

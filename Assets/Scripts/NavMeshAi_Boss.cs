@@ -15,6 +15,8 @@ public class NavMeshAi_Boss: MonoBehaviour
 
     private GameObject explosionInstance;
 
+
+
     public bool isstop =false;
     void Start()
     {
@@ -130,13 +132,12 @@ public class NavMeshAi_Boss: MonoBehaviour
     
            }
 
-              public void enemyAttackBoomAreaEnd()
-           {
-           
-             remark.SetActive(false);
-    
-           }
-
+           public void enemyAttackBoomAreaEnd()
+            {
+                remark.SetActive(false);
+                
+            }
+          
         public void PlayExplosionEffect()
         {
             if (ps != null)
