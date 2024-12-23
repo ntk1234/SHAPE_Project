@@ -3156,7 +3156,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5004,7 +5004,6 @@ MonoBehaviour:
   checkplayer1: {fileID: 8732785420938414382}
   checkplayer2: {fileID: 1801114423}
   iswingame: 0
-  isspwan: 0
   startWaveTime: 5
   timeBetweenWaves: 10
   waves:
@@ -5915,7 +5914,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937108667}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6425,6 +6424,10 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1801114423}
+    - target: {fileID: 4444971161051513304, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: AudioEffect
+      value: 
+      objectReference: {fileID: 8300000, guid: a562ba76bbbd81b44ad2741235497d17, type: 3}
     - target: {fileID: 4630982007160221291, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
       propertyPath: gm
       value: 
@@ -6485,6 +6488,10 @@ PrefabInstance:
       propertyPath: cc1
       value: 
       objectReference: {fileID: 1801114429}
+    - target: {fileID: 8219734127200091184, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: kickAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 3e03064aef675434595c7969333a1067, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
