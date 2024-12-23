@@ -17,13 +17,23 @@ public class PlayerHealth : MonoBehaviour
 
      public bool isdefup=false;
 
+    public int playerID =0;
+
+    //public GameObject gm;
+
+    public ReviveHealthManger rhm;
+
     public GameObject defeffect;
+    
+    public Shop shop;
 
 
     void Start()
     {
         currentHealth = maxHealth;
         defeffect.SetActive(false);
+        rhm= GameObject.Find("GameManger").GetComponent<ReviveHealthManger>();
+        shop = GameObject.Find("GameManger").GetComponent<Shop>();
     }
 
     void Update()
@@ -93,6 +103,21 @@ public class PlayerHealth : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player died");
+
+        if(playerID == 1){
+        rhm.lastPlayer1Position = transform.position;
+        shop.re1pBtnObj.SetActive(true);
+        shop.isBuy1Pre = false;
+        }
+        else if (playerID == 2)
+        
+        {rhm.lastPlayer2Position = transform.position;
+        shop.re2pBtnObj.SetActive(true); 
+        shop.isBuy2Pre = false;
+        }
+
         Destroy(gameObject, 1);
+
+        
     }
 }

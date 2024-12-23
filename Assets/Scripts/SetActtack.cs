@@ -8,7 +8,7 @@ public class SetActtack : MonoBehaviour
     
     public CharController cc;
     public CharController1 cc1;
-    public AudioClip swingAudio;
+    public AudioClip swingAudio,kickAudio;
 
     public TwoPshoot ts;
 
@@ -35,7 +35,7 @@ public class SetActtack : MonoBehaviour
     public void ActivateKickHitbox()
     {
         kickbox.SetActive(true);
-        audioSource.clip = swingAudio;
+        audioSource.clip = kickAudio;
         audioSource.Play();
     }
     public void DeactivateKickHitbox()
@@ -47,7 +47,7 @@ public class SetActtack : MonoBehaviour
      public void ActivateHKickHitbox()
     {
         hkickbox.SetActive(true);
-        audioSource.clip = swingAudio;
+        audioSource.clip = kickAudio;
         audioSource.Play();
     }
     public void DeactivateHKickHitbox()
@@ -72,7 +72,7 @@ public class SetActtack : MonoBehaviour
      public void ActivateKickHitbox2P()
     {
         kickbox.SetActive(true);
-        audioSource.clip = swingAudio;
+        audioSource.clip = kickAudio;
         audioSource.Play();
     }
     public void DeactivateKickHitbox2P()

@@ -7,7 +7,7 @@ public class CanvasController : MonoBehaviour
 {
     public GameManager gameManager; // Reference to the GameManager script
 
-    public float turntime ;
+    //public float turntime ;
 
     [Header("Set HUD")]
     public GameObject hUD;
@@ -58,6 +58,8 @@ public class CanvasController : MonoBehaviour
     public Text _1pAllScore;
     public Text _2pAllScore;
     
+    public Text result;
+
     public Text grade;
     public Text _1pTitle;
     public Text _2pTitle;
@@ -206,7 +208,7 @@ public class CanvasController : MonoBehaviour
             }
         }
 
-        turntime+=Time.deltaTime;
+        //turntime+=Time.deltaTime;
        
     }
 
@@ -252,15 +254,18 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = true; // Make the cursor visible
 
 
-        if(turntime<=120f)
+        if (gameManager.iswingame){
+
+        result.text = "Your win !!!" ;   
+        if(gameManager.score>=800)
         {
             grade.text="S";
         }
-        else if(turntime<=180f)
+        else if(gameManager.score>=600)
         {
             grade.text="A";
         }
-        else if(turntime<=200f)
+        else if(gameManager.score>=400)
         {
             grade.text="B";
         }
@@ -268,6 +273,13 @@ public class CanvasController : MonoBehaviour
         {
            grade.text="C"; 
         }
+        }
+        else{
+
+            result.text = "Not completed ...";    
+            grade.text="D"; 
+        }
+
 
 
         _1pAllScore.text = "Score: " + gameManager._1pscore.ToString();
@@ -312,6 +324,8 @@ public class CanvasController : MonoBehaviour
         _1pTitle.text = _1pIslive_str +"\n"+ _1pstr;
         _2pTitle.text = _2pIslive_str +"\n"+ _2pstr;
     }
+
+
     public void CallShopMenu()
     {
         isPaused = true;
@@ -355,3 +369,5 @@ public class CanvasController : MonoBehaviour
         Application.Quit(); // Quit the application (won't work in the Unity editor)
     }
 }
+
+

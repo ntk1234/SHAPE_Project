@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public CanvasController canvasController; // Reference to the CanvasController script
     private GameObject player;
-    private bool iswingame = false;
+
+    public  GameObject checkplayer1,checkplayer2;
+    public bool iswingame = false;
 
     
 
@@ -49,6 +51,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        checkplayer1=GameObject.Find("1PlayerArmature");
+        checkplayer2=GameObject.Find("2PlayerArmature");
         waveTimer = startWaveTime; // Initialize the wave timer
         // Start the initial wave countdown in the CanvasController
         if (canvasController != null)
@@ -56,7 +60,23 @@ public class GameManager : MonoBehaviour
             canvasController.StartNewWaveCountdown(waveTimer);
         }
         new WaitForSeconds(timeBetweenWaves);
+
+
+        //if (!isstop){
         StartCoroutine(WaveManager());
+       // }
+    }
+
+    void Update()
+
+    {
+
+      
+         if (checkplayer1==null&&checkplayer2==null)
+        {
+            iswingame=false;
+            canvasController.WinGame();
+        }
     }
 
     public float GetWaveTimer()
@@ -93,6 +113,7 @@ public class GameManager : MonoBehaviour
         isWaveStartCountdown = false; // End the countdown
         Debug.Log($"Starting Wave: {wave.waveName}");
         waveTimer = timeBetweenWaves;
+    
         foreach (var enemySettings in wave.enemies)
         {
             StartCoroutine(SpawnEnemies(enemySettings));
@@ -104,6 +125,8 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
             if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
+
+                
                 waveInProgress = false;
                 Debug.Log($"Wave {wave.waveName} Completed! Transitioning to the shop menu.");
                 
@@ -112,35 +135,37 @@ public class GameManager : MonoBehaviour
                 if (!waveInProgress && currentWaveIndex == waves.Count - 1)
                 {
                     Debug.Log("All waves completed and all enemies destroyed. You win!");
-                    iswingame = true;
+                    iswingame=true;
                     canvasController.WinGame();
                 }
-                else
+                else 
                 {
                 canvasController.CallShopMenu();
                 yield return new WaitForSeconds(timeBetweenWaves);
                 WaveManager();
                 }
+                
             }
             yield return null;
         }
     }
-
-    private IEnumerator SpawnEnemies(EnemySettings settings)
-    {
-        for (int i = 0; i < settings.enemyCount; i++)
+        private IEnumerator SpawnEnemies(EnemySettings settings)
         {
-            Vector3 spawnPoint = RandomNavMeshLocation(radius);
-
-            if (spawnPoint != Vector3.zero
-                && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
+            for (int i = 0; i < settings.enemyCount; i++)
             {
-                Instantiate(settings.enemyPrefab, spawnPoint, Quaternion.identity);
-            }
+                Vector3 spawnPoint = RandomNavMeshLocation(radius);
 
-            yield return new WaitForSeconds(settings.spawnInterval);
+                if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
+                {
+                    Instantiate(settings.enemyPrefab, spawnPoint, Quaternion.identity);
+                }
+            
+                yield return new WaitForSeconds(settings.spawnInterval);
+
+               
+               
+            }
         }
-    }
 
     private Vector3 RandomNavMeshLocation(float radius)
     {     

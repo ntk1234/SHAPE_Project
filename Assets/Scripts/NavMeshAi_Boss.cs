@@ -40,6 +40,7 @@ public class NavMeshAi_Boss: MonoBehaviour
                 if (currentTarget == null || !currentTarget.gameObject.activeSelf)
                 {
                     FindNextTarget();
+                    isstop =false;
                 }
                 
 
@@ -69,6 +70,8 @@ public class NavMeshAi_Boss: MonoBehaviour
 
 
                 }
+                  
+                
                  
                 
                

@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
 
+
+
 public class Shop : MonoBehaviour
 
 {
+
+    public int respawn1p_prices =10;
+
+    public int respawn2p_prices =10;
+
     public int hkick_prices =100;
 
     public int smallheal_prices = 20 ;
@@ -14,27 +21,42 @@ public class Shop : MonoBehaviour
     public GameObject hkickcdtext,mgtext;
     public bool isBuyhkick=false;
 
-    //public bool isBuyedBuyhkick=false;
-   // public bool buyevent = false;
-
     public bool isBuymg=false;
+    public bool isBuy1Pre = false;
+
+    public bool isBuy2Pre = false;
+    public GameObject gm,re1pBtnObj,re2pBtnObj;
+
+  
 
     public PlayerHealth ph,ph2;
 
     public Expupdate eud;
 
-    public Button buyhkButton,buySmallBtn,buymgBtn;
+    public ReviveHealthManger rhm;
+
+    public Button buyhkButton,buySmallBtn,buymgBtn,re1pBtn,re2pBtn;
     // Start is called before the first frame update
     void Start()
     {
         isBuyhkick=false;
         isBuymg=false;
+
+        rhm=gm.GetComponent<ReviveHealthManger>();
+
         eud=GetComponent<Expupdate>();
         ph=GameObject.Find("1PlayerArmature").GetComponent<PlayerHealth>();
         ph2=GameObject.Find("2PlayerArmature").GetComponent<PlayerHealth>();
         buyhkButton.onClick.AddListener(Buyhkick); // Add a listener to the button click event
         buySmallBtn.onClick.AddListener(BuySmallHeal);
         buymgBtn.onClick.AddListener(Buymg);
+
+        re1pBtn.onClick.AddListener(Buyre1p);
+        re2pBtn.onClick.AddListener(Buyre2p);
+        //re2pBtn.onClick.AddListener();
+
+        re1pBtnObj.SetActive(false);
+        re2pBtnObj.SetActive(false);
     }
 
     void Buyhkick()
@@ -93,6 +115,7 @@ public class Shop : MonoBehaviour
             {
                  Debug.Log("You are full hp!");
             }
+            
         }
         else
         {
@@ -100,4 +123,63 @@ public class Shop : MonoBehaviour
         }
 
     }
+
+    
+     void Buyre1p() //buy re1 method
+    {
+        if (eud.currentExp >=  respawn1p_prices&&!isBuy1Pre)
+        {
+            
+            
+            eud.currentExp -= respawn1p_prices;
+
+
+        // Call the RevivePlayer method with the delegate
+            rhm.RevivePlayer1P();
+;
+            isBuy1Pre=true;
+    
+            Debug.Log("Buyre1p purchased!");
+         
+        }
+        else if(isBuy1Pre)
+        {
+            Debug.Log("You Can not buy re1 again!");
+        }
+        else
+        {
+            Debug.Log("Not enough cash!!!");
+        }
+
+    }
+
+     void Buyre2p()
+    {
+        if (eud.currentExp >=  respawn2p_prices&&!isBuy2Pre)
+        {
+            
+            
+            eud.currentExp -= respawn2p_prices;
+
+
+        // Call the RevivePlayer method with the delegate
+            rhm.RevivePlayer2P();
+
+          
+            isBuy2Pre=true;
+
+            Debug.Log("Buyre2p purchased!");
+         
+        }
+         else if(isBuy2Pre)
+        {
+            Debug.Log("You Can not buy re2 again!");
+        }
+        else
+        {
+            Debug.Log("Not enough cash!!!");
+        }
+
+    }
+
 }

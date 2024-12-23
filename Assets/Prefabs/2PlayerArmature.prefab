@@ -6376,7 +6376,10 @@ MonoBehaviour:
   defTimer: 0
   defRate: 5
   isdefup: 0
+  playerID: 2
+  rhm: {fileID: 0}
   defeffect: {fileID: 1521544069216930769}
+  shop: {fileID: 0}
 --- !u!143 &8716133492156354606
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6618,6 +6621,7 @@ MonoBehaviour:
   cc: {fileID: 0}
   cc1: {fileID: 8908128701216790318}
   swingAudio: {fileID: 8300000, guid: 08a83224e4b8bc541a154c464b95b4e4, type: 3}
+  kickAudio: {fileID: 8300000, guid: 3e03064aef675434595c7969333a1067, type: 3}
   ts: {fileID: 7884324900339148441}
   firepont: {fileID: 2356797244754711271}
 --- !u!54 &7454099686230583180
