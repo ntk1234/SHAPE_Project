@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
     public  GameObject checkplayer1,checkplayer2;
     public bool iswingame = false;
 
-    
+    public bool isgo = true;
+
+     public int total_i=0;
+
+    public int totalEnemyCount = 0; 
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
@@ -97,6 +101,7 @@ public class GameManager : MonoBehaviour
                     yield return null;
                 }
                 // Notify the CanvasController to restart the wave countdown
+                if(isgo)
                 yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
             }
         }
@@ -113,17 +118,19 @@ public class GameManager : MonoBehaviour
         isWaveStartCountdown = false; // End the countdown
         Debug.Log($"Starting Wave: {wave.waveName}");
         waveTimer = timeBetweenWaves;
+        
     
         foreach (var enemySettings in wave.enemies)
         {
             StartCoroutine(SpawnEnemies(enemySettings));
+            totalEnemyCount += enemySettings.enemyCount;
         }
 
         // Wait until all enemies are defeated
         while (waveInProgress)
         {
             yield return new WaitForSeconds(1f);
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+            if (isgo&&GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
             {
 
                 
@@ -143,6 +150,7 @@ public class GameManager : MonoBehaviour
                 canvasController.CallShopMenu();
                 yield return new WaitForSeconds(timeBetweenWaves);
                 WaveManager();
+                break;
                 }
                 
             }
@@ -151,20 +159,40 @@ public class GameManager : MonoBehaviour
     }
         private IEnumerator SpawnEnemies(EnemySettings settings)
         {
-            for (int i = 0; i < settings.enemyCount; i++)
+            isgo=false;
+           
+            
+           
+
+            for ( int i= 0; i < settings.enemyCount; i++)
             {
+                
+
                 Vector3 spawnPoint = RandomNavMeshLocation(radius);
 
                 if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
                 {
+                   
+                   // yield return new WaitForSeconds(1f);
                     Instantiate(settings.enemyPrefab, spawnPoint, Quaternion.identity);
+                   
                 }
-            
-                yield return new WaitForSeconds(settings.spawnInterval);
-
+                 total_i++;
                
+                yield return new WaitForSeconds(settings.spawnInterval);
+               
+                Debug.Log("total_i:"+total_i+"totalEnemyCount"+totalEnemyCount);
+              
+            
                
             }
+            if (total_i==totalEnemyCount&&GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+
+                {
+                    isgo=true;
+                    total_i=0;
+                    totalEnemyCount=0;
+                }
         }
 
     private Vector3 RandomNavMeshLocation(float radius)
