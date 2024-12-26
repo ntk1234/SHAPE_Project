@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;  // For UI elements
 
+
 public class GameManager : MonoBehaviour
 {
     public CanvasController canvasController; // Reference to the CanvasController script
@@ -16,7 +17,7 @@ public class GameManager : MonoBehaviour
 
      public int total_i=0;
 
-    public int totalEnemyCount = 0; 
+    public int totalEnemyCount = -1; 
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
@@ -81,6 +82,12 @@ public class GameManager : MonoBehaviour
             iswingame=false;
             canvasController.WinGame();
         }
+        if (total_i == totalEnemyCount && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
+                {
+                    isgo = true;
+                    total_i = 0;
+                    totalEnemyCount = 0;
+                }
     }
 
     public float GetWaveTimer()
@@ -101,8 +108,8 @@ public class GameManager : MonoBehaviour
                     yield return null;
                 }
                 // Notify the CanvasController to restart the wave countdown
-                if(isgo)
-                yield return StartCoroutine(StartWave(waves[currentWaveIndex]));
+                if(isgo){
+                yield return StartCoroutine(StartWave(waves[currentWaveIndex]));}
             }
         }
     }
@@ -144,6 +151,7 @@ public class GameManager : MonoBehaviour
                     Debug.Log("All waves completed and all enemies destroyed. You win!");
                     iswingame=true;
                     canvasController.WinGame();
+                    break;
                 }
                 else 
                 {
@@ -168,6 +176,7 @@ public class GameManager : MonoBehaviour
             {
                 
 
+
                 Vector3 spawnPoint = RandomNavMeshLocation(radius);
 
                 if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
@@ -179,20 +188,14 @@ public class GameManager : MonoBehaviour
                 }
                  total_i++;
                
+
                 yield return new WaitForSeconds(settings.spawnInterval);
                
                 Debug.Log("total_i:"+total_i+"totalEnemyCount"+totalEnemyCount);
-              
-            
                
             }
-            if (total_i==totalEnemyCount&&GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
-
-                {
-                    isgo=true;
-                    total_i=0;
-                    totalEnemyCount=0;
-                }
+            
+          
         }
 
     private Vector3 RandomNavMeshLocation(float radius)
@@ -206,6 +209,7 @@ public class GameManager : MonoBehaviour
 
         return Vector3.zero;
     }
+
 
     // Call this method to add points when an enemy is defeated
     public void AddScore(int points,int playerID)
