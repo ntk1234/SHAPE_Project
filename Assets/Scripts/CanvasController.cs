@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class CanvasController : MonoBehaviour
 {
@@ -38,14 +39,13 @@ public class CanvasController : MonoBehaviour
 
     [Header("PauseMenu")]
     public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
-    private bool isPaused = false;
+    public bool isPaused = false;
 
     [Header("Coin Display")]
     public Text coinText; // Text element to display experience or coins
 
     public Expupdate expupdate; // Reference to the Expupdate script
-    public GameObject gm; // GameManager or related object holding Expupdate
-
+  
     [Header("Wave Timer")]
     public Text waveTimerText; // UI Text element to display the wave timer
 
@@ -69,6 +69,8 @@ public class CanvasController : MonoBehaviour
 
      public string _1pIslive_str=" ";
      public string _2pIslive_str=" ";
+
+      public string nextSceneName;
 
     [Header("Shop Menu")]
     public GameObject shopMenuUI;
@@ -129,13 +131,12 @@ public class CanvasController : MonoBehaviour
             }
         }
 
-        if (gm != null)
-        {
-            expupdate = gm.GetComponent<Expupdate>();
-        }
+    
 
         if (gameManager != null)
         {
+
+            expupdate = gameManager.GetComponent<Expupdate>();
             countdownTimer = gameManager.startWaveTime; // Initialize with the start wave time
             isCountingDown = true; // Begin the countdown
         }
@@ -336,6 +337,15 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = true; // Make the cursor visible
     }
 
+      public void ReturnMain()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // Resume the game
+        SceneManager.LoadScene(nextSceneName);
+        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
+        Cursor.visible = false; // Hide the cursor
+    }
+
     public void PauseGame()
     {
         isPaused = true;
@@ -368,6 +378,9 @@ public class CanvasController : MonoBehaviour
         Debug.Log("Quitting game...");
         Application.Quit(); // Quit the application (won't work in the Unity editor)
     }
+
+
+    
 }
 
 

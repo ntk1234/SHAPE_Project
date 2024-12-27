@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;  // For UI elements
+using UnityEngine.SceneManagement;
 
 
 public class GameManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
      public int total_i=0;
 
     public int totalEnemyCount = -1; 
+
 
     [Header("Wave Settings")]
     public float startWaveTime = 5f; // Delay before the first wave starts
@@ -81,6 +83,7 @@ public class GameManager : MonoBehaviour
         {
             iswingame=false;
             canvasController.WinGame();
+         
         }
         if (total_i == totalEnemyCount && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
                 {
@@ -198,17 +201,24 @@ public class GameManager : MonoBehaviour
           
         }
 
-    private Vector3 RandomNavMeshLocation(float radius)
-    {     
-        Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
+        private Vector3 RandomNavMeshLocation(float radius)
+        {     
+            Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
 
-        if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
-        {
-            return hit.position;
+            if (player == null)
+            {
+                return Vector3.zero; // Return zero vector if player object is null
+            }
+
+            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
+            {
+                return hit.position;
+            }
+
+            return Vector3.zero;
         }
 
-        return Vector3.zero;
-    }
+  
 
 
     // Call this method to add points when an enemy is defeated
