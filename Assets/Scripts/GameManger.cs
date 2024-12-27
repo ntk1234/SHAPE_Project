@@ -58,8 +58,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        checkplayer1=GameObject.Find("1PlayerArmature");
-        checkplayer2=GameObject.Find("2PlayerArmature");
+        if(checkplayer1!=null){
+        checkplayer1=GameObject.Find("1PlayerArmature");}
+
+        if(checkplayer2!=null){
+        checkplayer2=GameObject.Find("2PlayerArmature");}
         waveTimer = startWaveTime; // Initialize the wave timer
         // Start the initial wave countdown in the CanvasController
         if (canvasController != null)

@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
 
     public GameObject credit;
 
+    public GameObject scoreshow;
+
     [SerializeField] private GameObject loadingCanvas;
     [SerializeField] private GameObject menuCanvas;
 
@@ -26,6 +28,16 @@ public class MainMenu : MonoBehaviour
     public void Credit()
     {
         credit.SetActive(true);
+    }
+
+    public void Scoreshow()
+    {
+       scoreshow.SetActive(true);
+    }
+
+    public void CloseScoreshow()
+    {
+       scoreshow.SetActive(false);
     }
 
     public void Exit()

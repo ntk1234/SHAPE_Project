@@ -1936,6 +1936,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1638613609}
+  scoreboardManager: {fileID: 1638613613}
   hUD: {fileID: 1296785085}
   player1: {fileID: 8732785420938414382}
   player2: {fileID: 1801114423}
@@ -1961,6 +1962,7 @@ MonoBehaviour:
   _2pAllScore: {fileID: 734492181}
   result: {fileID: 24400894}
   grade: {fileID: 1839064735}
+  grade_str: 
   _1pTitle: {fileID: 686015901}
   _2pTitle: {fileID: 746939802}
   _1pstr: ' '
@@ -3839,7 +3841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5658,6 +5660,7 @@ GameObject:
   - component: {fileID: 1638613606}
   - component: {fileID: 1638613607}
   - component: {fileID: 1638613608}
+  - component: {fileID: 1638613613}
   - component: {fileID: 1638613612}
   - component: {fileID: 1638613609}
   - component: {fileID: 1638613610}
@@ -5965,6 +5968,19 @@ MonoBehaviour:
   shop: {fileID: 1638613611}
   gamemanger: {fileID: 0}
   isReviving: 0
+--- !u!114 &1638613613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638613604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8eadaeeb2c71f42907da73e1683cc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreboardText: {fileID: 0}
 --- !u!1 &1666173432
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,7 +6886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937108667}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266048, z: -0.0000000027271636, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

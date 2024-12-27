@@ -9,6 +9,7 @@ public class CanvasController : MonoBehaviour
     public GameManager gameManager; // Reference to the GameManager script
 
     //public float turntime ;
+    public ScoreboardManager scoreboardManager;
 
     [Header("Set HUD")]
     public GameObject hUD;
@@ -61,6 +62,8 @@ public class CanvasController : MonoBehaviour
     public Text result;
 
     public Text grade;
+
+    public string grade_str;
     public Text _1pTitle;
     public Text _2pTitle;
 
@@ -85,6 +88,8 @@ public class CanvasController : MonoBehaviour
         Cursor.visible = false; // Hide the cursor
 
         gameManager = FindObjectOfType<GameManager>(); // Assign the GameManager component
+
+        scoreboardManager = FindObjectOfType<ScoreboardManager>(); 
 
         cc = player1.GetComponent<CharController>();
         cc1 = player2.GetComponent<CharController1>();
@@ -260,27 +265,27 @@ public class CanvasController : MonoBehaviour
         result.text = "Your win !!!" ;   
         if(gameManager.score>=800)
         {
-            grade.text="S";
+            grade_str="S";
         }
         else if(gameManager.score>=600)
         {
-            grade.text="A";
+            grade_str="A";
         }
         else if(gameManager.score>=400)
         {
-            grade.text="B";
+            grade_str="B";
         }
         else
         {
-           grade.text="C"; 
+           grade_str="C"; 
         }
         }
         else{
 
             result.text = "Not completed ...";    
-            grade.text="D"; 
+           grade_str="D"; 
         }
-
+        grade.text=grade_str;
 
 
         _1pAllScore.text = "Score: " + gameManager._1pscore.ToString();
@@ -341,10 +346,13 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume the game
+        scoreboardManager.AddScore(gameManager.score,grade_str);
+        scoreboardManager.SaveScores();
         SceneManager.LoadScene(nextSceneName);
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
     }
+
 
     public void PauseGame()
     {
