@@ -2554,8 +2554,7 @@ MonoBehaviour:
   m_text: 'Scoreboard
 
 
-
-    Rank  1 : Score:  1111 Grade: A'
+    Rank\t\tScore\t\tGrade '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ed78af6c6328a774ea2b457ce8ee0717, type: 2}
   m_sharedMaterial: {fileID: -5506634847782500790, guid: ed78af6c6328a774ea2b457ce8ee0717, type: 2}

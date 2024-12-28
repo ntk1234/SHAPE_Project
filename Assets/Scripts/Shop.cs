@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
-
+using TMPro;
 
 
 public class Shop : MonoBehaviour
@@ -25,7 +25,7 @@ public class Shop : MonoBehaviour
     public bool isBuy1Pre = false;
 
     public bool isBuy2Pre = false;
-    public GameObject gm,re1pBtnObj,re2pBtnObj;
+    public GameObject gm,re1pBtnObj,re2pBtnObj,shopTextObj;
 
   
 
@@ -36,6 +36,10 @@ public class Shop : MonoBehaviour
     public ReviveHealthManger rhm;
 
     public Button buyhkButton,buySmallBtn,buymgBtn,re1pBtn,re2pBtn;
+
+
+    public TextMeshProUGUI shopText; 
+    public TextMeshProUGUI shop1pskillText,shop2pskillText,shopHealText,shopRe1Text,shopRe2Text; 
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +61,13 @@ public class Shop : MonoBehaviour
 
         re1pBtnObj.SetActive(false);
         re2pBtnObj.SetActive(false);
+        shopText=shopTextObj.GetComponent<TextMeshProUGUI>();
+        shopText.text=" ";
+        shop1pskillText.text="$ "+hkick_prices;
+        shop2pskillText.text="$ "+mg_prices;
+        shopHealText.text="$ "+smallheal_prices;
+        shopRe1Text.text="$ "+respawn1p_prices;
+        shopRe2Text.text="$ "+respawn2p_prices;
     }
 
     void Buyhkick()
@@ -68,14 +79,18 @@ public class Shop : MonoBehaviour
             isBuyhkick = true;
            // isBuyedBuyhkick=true;
             Debug.Log("Buyhkick purchased!");
+
+            shopText.text="Buy 1p Skill purchased!";
         }
         else if(isBuyhkick)
         {
             Debug.Log("You Can not buy again!");
+             shopText.text="You can not buy again!";
         }
         else
         {
             Debug.Log("Not enough cash!!!");
+            shopText.text="Not enough cash!!!";
         }
 
     }
@@ -88,14 +103,17 @@ public class Shop : MonoBehaviour
             isBuymg = true;
            // isBuyedBuyhkick=true;
             Debug.Log("Buymg purchased!");
+            shopText.text="Buy 2p Skill purchased!";
         }
         else if(isBuymg)
         {
             Debug.Log("You Can not buy again!");
+            shopText.text="You can not buy again!";
         }
         else
         {
             Debug.Log("Not enough cash!!!");
+            shopText.text="Not enough cash!!!";
         }
 
     }
@@ -110,16 +128,21 @@ public class Shop : MonoBehaviour
 
             ph.Heal(20);    
             ph2.Heal(20); 
-            Debug.Log("Buyheal purchased!");}
+            Debug.Log("Buyheal purchased!");
+            shopText.text=$"1p Player healed. HP: {ph.currentHealth}/100\n"+$"2p Player healed. HP: {ph2.currentHealth}/100";
+            }
+            
             else
             {
                  Debug.Log("You are full hp!");
+                shopText.text="You are full hp!";
             }
             
         }
         else
         {
             Debug.Log("Not enough cash!!!");
+            shopText.text="Not enough cash!!!";
         }
 
     }
@@ -140,15 +163,18 @@ public class Shop : MonoBehaviour
             isBuy1Pre=true;
     
             Debug.Log("Buyre1p purchased!");
+            shopText.text="1p player resurrected!";
          
         }
         else if(isBuy1Pre)
         {
             Debug.Log("You Can not buy re1 again!");
+            shopText.text="You can not buy again!";
         }
         else
         {
             Debug.Log("Not enough cash!!!");
+             shopText.text="Not enough cash!!!";
         }
 
     }
@@ -169,15 +195,18 @@ public class Shop : MonoBehaviour
             isBuy2Pre=true;
 
             Debug.Log("Buyre2p purchased!");
+            shopText.text="2p player resurrected!";
          
         }
          else if(isBuy2Pre)
         {
             Debug.Log("You Can not buy re2 again!");
+             shopText.text="You can not buy again!";
         }
         else
         {
             Debug.Log("Not enough cash!!!");
+             shopText.text="Not enough cash!!!";
         }
 
     }

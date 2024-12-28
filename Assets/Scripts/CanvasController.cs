@@ -35,7 +35,9 @@ public class CanvasController : MonoBehaviour
     //public Slider player2MpBar;
     public float mpBarLerpSpeed = 5f; // Speed of the HP bar interpolation
 
-    [Header("Set Score Text")]
+    [Header("Set Score ")]
+
+    public GameObject shopMenuUI;
     public Text scoreText; // Reference to the Text component to display the score
 
     [Header("PauseMenu")]
@@ -43,7 +45,7 @@ public class CanvasController : MonoBehaviour
     public bool isPaused = false;
 
     [Header("Coin Display")]
-    public Text coinText; // Text element to display experience or coins
+    public Text coinText,shopcoinText; // Text element to display experience or coins
 
     public Expupdate expupdate; // Reference to the Expupdate script
   
@@ -75,8 +77,6 @@ public class CanvasController : MonoBehaviour
 
       public string nextSceneName;
 
-    [Header("Shop Menu")]
-    public GameObject shopMenuUI;
 
 
 
@@ -182,6 +182,10 @@ public class CanvasController : MonoBehaviour
         if (coinText != null && expupdate != null)
         {
             coinText.text = "Coins: " + expupdate.currentExp.ToString();
+        }
+        if (shopcoinText != null && expupdate != null)
+        {
+            shopcoinText.text = "Coins: " + expupdate.currentExp.ToString();
         }
        
         // Countdown logic for wave timer
