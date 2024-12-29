@@ -105,14 +105,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  maxHealth: 50
+  maxHealth: 100
   currentHealth: 0
   damage: 10
-  exp: 10
-  points: 10
+  exp: 30
+  points: 30
   expUpdate: {fileID: 0}
   exprate: 0.5
-  lootObjects: []
+  lootObjects:
+  - prefab: {fileID: 8465656554721108770, guid: d60faf238af5bdb4594a9317b6b9061b, type: 3}
+    dropChance: 0.5
   originalMaterial: {fileID: 0}
   flashMaterial: {fileID: 0}
   flashDuration: 0.7

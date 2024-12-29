@@ -55,7 +55,18 @@ public class NavMeshAi_ZM: MonoBehaviour
                 }
 
                 
+                   
+                
                
+            }
+            void FixedUpdate()
+            {
+                if(currentTarget != null&&Vector3.Distance(transform.position, currentTarget.position) > 5f)
+                {
+                     FindNextTarget();
+
+                     Debug.Log("ZM IS CHECK");
+                }
             }
 
             void FindNextTarget()

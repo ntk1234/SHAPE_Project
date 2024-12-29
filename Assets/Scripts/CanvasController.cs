@@ -257,6 +257,7 @@ public class CanvasController : MonoBehaviour
 
     public void WinGame()
     {
+        isPaused = true;
         Time.timeScale = 0f; // Freeze the game
         hUD.SetActive(false);
         winGameUI.SetActive(true); // Show the pause menu
@@ -350,11 +351,12 @@ public class CanvasController : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f; // Resume the game
+       // Hide the cursor
         scoreboardManager.AddScore(gameManager.score,grade_str);
         scoreboardManager.SaveScores();
+        gameManager.isreturnMain=true;
         SceneManager.LoadScene(nextSceneName);
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Cursor.visible = false; // Hide the cursor
+        
     }
 
 

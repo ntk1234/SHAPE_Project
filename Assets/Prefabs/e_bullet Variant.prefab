@@ -124,7 +124,7 @@ MonoBehaviour:
   particleSystemToDestroy2: {fileID: 1485274779851867637}
   ps1: {fileID: 5369729700211746376}
   ps2: {fileID: 5777840137573633854}
-  damage: 0
+  damage: 3
 --- !u!54 &5981918155151190784
 Rigidbody:
   m_ObjectHideFlags: 0

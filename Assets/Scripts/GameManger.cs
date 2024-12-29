@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public CanvasController canvasController; // Reference to the CanvasController script
-    private GameObject player;
+    public GameObject player;
 
     public  GameObject checkplayer1,checkplayer2;
     public bool iswingame = false;
@@ -18,7 +18,9 @@ public class GameManager : MonoBehaviour
 
      public int total_i=0;
 
-    public int totalEnemyCount = -1; 
+    public int totalEnemyCount = -1;
+    
+      public bool isreturnMain =false;
 
 
     [Header("Wave Settings")]
@@ -85,7 +87,8 @@ public class GameManager : MonoBehaviour
          if (checkplayer1==null&&checkplayer2==null)
         {
             iswingame=false;
-            canvasController.WinGame();
+            if(!isreturnMain){
+            canvasController.WinGame();}
          
         }
         if (total_i == totalEnemyCount && GameObject.FindGameObjectsWithTag("Enemy").Length == 0)
@@ -156,7 +159,8 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log("All waves completed and all enemies destroyed. You win!");
                     iswingame=true;
-                    canvasController.WinGame();
+                     if(!isreturnMain){
+                    canvasController.WinGame();}
                     break;
                 }
                 else 
@@ -204,24 +208,23 @@ public class GameManager : MonoBehaviour
           
         }
 
-        private Vector3 RandomNavMeshLocation(float radius)
-        {     
-            Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
+   
+            private Vector3 RandomNavMeshLocation(float radius)
+            {     
+                if (player == null)
+                {
+                  player = GameObject.FindGameObjectWithTag("Player");
+                }
 
-            if (player == null)
-            {
-                return Vector3.zero; // Return zero vector if player object is null
+                Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
+
+                if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
+                {
+                    return hit.position;
+                }
+
+                return Vector3.zero;
             }
-
-            if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
-            {
-                return hit.position;
-            }
-
-            return Vector3.zero;
-        }
-
-  
 
 
     // Call this method to add points when an enemy is defeated

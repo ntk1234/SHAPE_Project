@@ -26,16 +26,17 @@ public class ReviveHealthManger : MonoBehaviour
 
     public Shop shop;
     
-    public GameManager gamemanger;
+    public GameManager gameManager ;
 
     public bool isReviving =false;
 
     void Start()
     {
-        canvasController = GameObject.Find("Canvas").GetComponent<CanvasController>();
+        canvasController =FindObjectOfType<CanvasController>(); 
         targetGroup = GameObject.Find("Target Group").GetComponent<CinemachineTargetGroup>();
-        shop = GameObject.Find("GameManger").GetComponent<Shop>();
-        gamemanger = GameObject.Find("GameManger").GetComponent<GameManager>();;
+        gameManager = FindObjectOfType<GameManager>(); 
+        shop = gameManager.GetComponent<Shop>();
+       // gamemanger = GameObject.Find("GameManger").GetComponent<GameManager>();;
     }
 
     // Update is called once per frame
@@ -79,7 +80,8 @@ public class ReviveHealthManger : MonoBehaviour
         targetGroup.m_Targets[0].target = newplayer.transform; // 更新CinemachineTargetGroup中的目標
         shop.ph= newplayer.GetComponent<PlayerHealth>();//找SHOP 腳本
         shop.re1pBtnObj.SetActive(false);
-        gamemanger.checkplayer1=newplayer;
+        gameManager.checkplayer1=newplayer;
+        //gameManager.player = GameObject.FindGameObjectWithTag("Player");
         }
 
 
@@ -93,7 +95,8 @@ public class ReviveHealthManger : MonoBehaviour
         targetGroup.m_Targets[1].target = newplayer.transform; // 更新CinemachineTargetGroup中的目標
         shop.ph2= newplayer.GetComponent<PlayerHealth>();
         shop.re2pBtnObj.SetActive(false); 
-        gamemanger.checkplayer2=newplayer;
+        gameManager.checkplayer2=newplayer;
+       // gameManager.player = GameObject.FindGameObjectWithTag("Player");
         }
 
        

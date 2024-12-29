@@ -673,7 +673,7 @@ RectTransform:
   m_Father: {fileID: 404352447}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1310,10 +1310,10 @@ RectTransform:
   - {fileID: 1273381431}
   m_Father: {fileID: 1679830985}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &377880836
 MonoBehaviour:
@@ -1837,7 +1837,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2046,7 +2046,7 @@ RectTransform:
   m_Father: {fileID: 225748315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2241,7 +2241,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &615274421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3882,7 +3882,7 @@ RectTransform:
   m_Father: {fileID: 1720866866}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4037,10 +4037,10 @@ RectTransform:
   - {fileID: 1411005915}
   m_Father: {fileID: 1836201863}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &915964130
 MonoBehaviour:
@@ -4055,7 +4055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.79607844}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.69411767}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4384,7 +4384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000003326604, z: 0.0000000027271627, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4616,7 +4616,7 @@ RectTransform:
   m_Father: {fileID: 1269570643}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5254,7 +5254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1296785086
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6509,6 +6509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasController: {fileID: 615274425}
+  player: {fileID: 0}
   checkplayer1: {fileID: 8732785420938414382}
   checkplayer2: {fileID: 1801114423}
   iswingame: 0
@@ -6551,7 +6552,7 @@ MonoBehaviour:
       spawnInterval: 30
   - waveName: Wave 6
     enemies:
-    - enemyPrefab: {fileID: 5869503302785327015, guid: 6a61c20fbfc228946b43b1ca36d2aec8, type: 3}
+    - enemyPrefab: {fileID: 5869503302785327015, guid: 137687da6ecf45f4e830c3c630412cf8, type: 3}
       enemyCount: 15
       spawnInterval: 3
     - enemyPrefab: {fileID: 2174922284090481077, guid: 263d82104f44fa64b9ca0b4b9268048c, type: 3}
@@ -6562,10 +6563,10 @@ MonoBehaviour:
       spawnInterval: 45
   - waveName: Wave 7
     enemies:
-    - enemyPrefab: {fileID: 5869503302785327015, guid: 6a61c20fbfc228946b43b1ca36d2aec8, type: 3}
+    - enemyPrefab: {fileID: 2174922284090481077, guid: bfc2ab0c0428d6642962e493bbdfe945, type: 3}
       enemyCount: 17
       spawnInterval: 3
-    - enemyPrefab: {fileID: 2174922284090481077, guid: 263d82104f44fa64b9ca0b4b9268048c, type: 3}
+    - enemyPrefab: {fileID: 5869503302785327015, guid: 137687da6ecf45f4e830c3c630412cf8, type: 3}
       enemyCount: 7
       spawnInterval: 7
     - enemyPrefab: {fileID: 1503102670821561345, guid: 30afdd6828c9b384f9ad4455a8529ee6, type: 3}
@@ -6650,7 +6651,7 @@ MonoBehaviour:
   lastPlayer2Position: {x: 0, y: 0, z: 0}
   targetGroup: {fileID: 1994016975}
   shop: {fileID: 1638613611}
-  gamemanger: {fileID: 0}
+  gameManager: {fileID: 0}
   isReviving: 0
 --- !u!114 &1638613613
 MonoBehaviour:
@@ -7783,7 +7784,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937108667}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6339889, y: 0.0000000033266045, z: -0.0000000027271632, w: 0.7733422}
+  m_LocalRotation: {x: 0.6339889, y: -0.000000003326604, z: 0.0000000027271627, w: 0.7733422}
   m_LocalPosition: {x: 2.3511825, y: 50, z: -8.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8009,7 +8010,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2062995926
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8296,10 +8297,6 @@ PrefabInstance:
       propertyPath: player2
       value: 
       objectReference: {fileID: 1801114423}
-    - target: {fileID: 4444971161051513304, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
-      propertyPath: AudioEffect
-      value: 
-      objectReference: {fileID: 8300000, guid: a562ba76bbbd81b44ad2741235497d17, type: 3}
     - target: {fileID: 4630982007160221291, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
       propertyPath: gm
       value: 
@@ -8356,14 +8353,26 @@ PrefabInstance:
       propertyPath: shop
       value: 
       objectReference: {fileID: 1638613611}
+    - target: {fileID: 7810106755108186230, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: killcd
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810106755108186230, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: killcd2
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810106755108186230, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: killimage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7810106755108186230, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
+      propertyPath: killimage2
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8219734127200091184, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
       propertyPath: cc1
       value: 
       objectReference: {fileID: 1801114429}
-    - target: {fileID: 8219734127200091184, guid: f95ab0e3bafb8a649b36c468eb3d75c1, type: 3}
-      propertyPath: kickAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: 3e03064aef675434595c7969333a1067, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8456,6 +8465,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -92.48364
       objectReference: {fileID: 0}
+    - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
+      propertyPath: killcd
+      value: 
+      objectReference: {fileID: 377880834}
+    - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
+      propertyPath: killcd2
+      value: 
+      objectReference: {fileID: 1107867802}
+    - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
+      propertyPath: killimage
+      value: 
+      objectReference: {fileID: 377880836}
+    - target: {fileID: 8908128701216790318, guid: c24e361494288c5499091a5f0234e67e, type: 3}
+      propertyPath: killimage2
+      value: 
+      objectReference: {fileID: 1107867804}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

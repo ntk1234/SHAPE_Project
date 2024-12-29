@@ -28,7 +28,7 @@ public class NavMeshAi : MonoBehaviour
 
                 void Update()
             {
-                if (currentTarget == null || !currentTarget.gameObject.activeSelf)
+                if (currentTarget == null || !currentTarget.gameObject.activeSelf||Vector3.Distance(transform.position, currentTarget.position) > 5f)
                 {
                     FindNextTarget();
                 }

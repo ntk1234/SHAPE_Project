@@ -84,7 +84,7 @@ GameObject:
   - component: {fileID: 5545608696816876746}
   - component: {fileID: 3372318954899898881}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy_add_def
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,6 +286,8 @@ MonoBehaviour:
   exprate: 0.5
   lootObjects:
   - prefab: {fileID: 8465656554721108770, guid: 2109c74deb5b2ed4caf883e1ef7359d6, type: 3}
+    dropChance: 0.25
+  - prefab: {fileID: 5092148082411668395, guid: 275935574e5adf54f9a4a4121c55757e, type: 3}
     dropChance: 0.25
   originalMaterial: {fileID: 0}
   flashMaterial: {fileID: 0}

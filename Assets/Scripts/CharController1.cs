@@ -40,7 +40,10 @@ public class CharController1 : MonoBehaviour
 
         public Shop shop;
 
+         public GameObject killcd,killcd2;
+         public Image killimage,killimage2;
 
+       
  
     // Start is called before the first frame update
     void Start()
@@ -48,6 +51,10 @@ public class CharController1 : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         shop = GameObject.Find("GameManger").GetComponent<Shop>();
+        killcd =GameObject.Find("Canvas/HUD/2pCD/kickcd");
+        killcd2 =GameObject.Find("Canvas/HUD/2pCD/mgicktext");
+        killimage= killcd.GetComponent<Image>();
+        killimage2= killcd2.GetComponent<Image>();
         kickTimer = kickRate;
         fightTimer = fightRate;
         mgTimer = mgRate;
@@ -112,6 +119,17 @@ public class CharController1 : MonoBehaviour
          {
             kickTimer=kickRate;
          }
+
+           if (currMp>=kickMp)
+        {
+            Color newColor = Color.white;
+            newColor.a = 0.9f;
+            killimage.color = newColor;
+        }else
+        {
+            killimage.color= new Color(205f/255f, 205f/255f, 205f/255f,0.7f);;
+        }
+
         if (Input.GetKeyDown("n") && kickTimer >= kickRate&&!isPunch&&!isKick&&!isMg&&currMp>=kickMp)//踢撃條件達成
         {
             
@@ -120,6 +138,15 @@ public class CharController1 : MonoBehaviour
             animator.SetTrigger("kick");
             kickTimer = 0f;
             
+        }
+           if (currMp>=mgMp)
+        {
+            Color newColor = Color.white;
+            newColor.a = 0.9f;
+            killimage2.color = newColor;
+        }else
+        {
+            killimage2.color= new Color(205f/255f, 205f/255f, 205f/255f,0.7f);;
         }
          
 
