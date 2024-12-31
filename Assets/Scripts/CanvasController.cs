@@ -287,8 +287,25 @@ public class CanvasController : MonoBehaviour
         }
         else{
 
-            result.text = "Not completed ...";    
-           grade_str="D"; 
+            result.text = "Not completed ..."; 
+
+            if(gameManager.score>=800)
+            {
+                grade_str="A";
+            }
+            else if(gameManager.score>=600)
+            {
+                grade_str="B";
+            }
+            else if(gameManager.score>=400)
+            {
+                grade_str="C";
+            }
+            else
+            {
+            grade_str="D"; 
+            } 
+
         }
         grade.text=grade_str;
 
@@ -355,6 +372,14 @@ public class CanvasController : MonoBehaviour
         scoreboardManager.AddScore(gameManager.score,grade_str);
         scoreboardManager.SaveScores();
         gameManager.isreturnMain=true;
+        SceneManager.LoadScene(nextSceneName);
+        
+    }
+
+     public void ReturnMain2()
+    {
+        isPaused = false;
+        Time.timeScale = 1f; // Resume the game
         SceneManager.LoadScene(nextSceneName);
         
     }

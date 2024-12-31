@@ -130,6 +130,22 @@ public class Shop : MonoBehaviour
             ph2.Heal(20); 
             Debug.Log("Buyheal purchased!");
             shopText.text=$"1p Player healed. HP: {ph.currentHealth}/100\n"+$"2p Player healed. HP: {ph2.currentHealth}/100";
+            if(ph==null)
+            {
+             shopText.text=$"1p Player died. HP: 0/100\n"+$"2p Player healed. HP: {ph2.currentHealth}/100";
+            }
+             if(ph2==null)
+            {
+                shopText.text=$"1p Player healed. HP: {ph.currentHealth}/100\n"+$"2p Player died. HP: 0/100";
+            }
+            if(isBuy1Pre)
+            {
+            shopText.text=$"1p Player resurrected. HP: 100/100\n"+$"2p Player healed. HP: {ph2.currentHealth}/100";
+            }
+            if(isBuy2Pre)
+            {
+            shopText.text=$"1p Player healed. HP: {ph.currentHealth}/100\n"+$"2p Player resurrected. HP: 100/100";
+            }
             }
             
             else

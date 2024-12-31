@@ -187,7 +187,7 @@ public class GameManager : MonoBehaviour
                 
 
 
-                Vector3 spawnPoint = RandomNavMeshLocation(radius);
+                Vector3 spawnPoint = RandomNavMeshLocation(radius, "AvoidTagHere");
 
                 if (spawnPoint != Vector3.zero && Vector3.Distance(spawnPoint, player.transform.position) > minEnemyDistance)
                 {
@@ -208,24 +208,41 @@ public class GameManager : MonoBehaviour
           
         }
 
-   
-            private Vector3 RandomNavMeshLocation(float radius)
-            {     
-                if (player == null)
-                {
-                  player = GameObject.FindGameObjectWithTag("Player");
-                }
-
-                Vector3 randomPoint = Random.insideUnitSphere * radius + player.transform.position;
-
-                if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, 1))
-                {
-                    return hit.position;
-                }
-
-                return Vector3.zero;
+        private Vector3 RandomNavMeshLocation(float radius, string avoidTag)
+        {     
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
             }
 
+            Vector3 randomPoint = Vector3.zero;
+            NavMeshHit hit;
+
+            do
+            {
+                randomPoint = Random.insideUnitSphere * radius + player.transform.position;
+
+                if (NavMesh.SamplePosition(randomPoint, out hit, radius, 1))
+                {
+                    Collider[] colliders = Physics.OverlapSphere(hit.position, 1f); // 檢查生成位置周圍1個單位內的碰撞體
+
+                    bool avoidPosition = false;
+                    foreach (Collider collider in colliders)
+                    {
+                        if (collider.CompareTag(avoidTag))
+                        {
+                            avoidPosition = true;
+                            break;
+                        }
+                    }
+
+                    if (!avoidPosition)
+                    {
+                        return hit.position; // 如果生成位置不在特定tag的位置，返回該位置
+                    }
+                }
+            } while (true);
+        }
 
     // Call this method to add points when an enemy is defeated
     public void AddScore(int points,int playerID)

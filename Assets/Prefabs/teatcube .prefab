@@ -105,9 +105,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  maxHealth: 100
+  maxHealth: 70
   currentHealth: 0
-  damage: 10
+  damage: 0
   exp: 30
   points: 30
   expUpdate: {fileID: 0}
