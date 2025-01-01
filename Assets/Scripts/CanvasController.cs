@@ -44,6 +44,10 @@ public class CanvasController : MonoBehaviour
     public GameObject pauseMenuUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
     public bool isPaused = false;
 
+    [Header("TutorialMenu")]
+    public GameObject tutorialUI; // Assign the Pause Menu UI Canvas or Panel in the Inspector
+ 
+
     [Header("Coin Display")]
     public Text coinText,shopcoinText; // Text element to display experience or coins
 
@@ -384,6 +388,16 @@ public class CanvasController : MonoBehaviour
         
     }
 
+    public void CallTutorialUI()
+    {
+        tutorialUI.SetActive(true);
+        
+    }
+
+     public void CloseTutorialUI()
+    {
+        tutorialUI.SetActive(false);
+    }
 
     public void PauseGame()
     {
@@ -407,6 +421,10 @@ public class CanvasController : MonoBehaviour
         if (shopMenuUI.activeSelf == true)
         {
             shopMenuUI.SetActive(false);
+        }
+          if (tutorialUI.activeSelf == true)
+        {
+            tutorialUI.SetActive(false);
         }
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
