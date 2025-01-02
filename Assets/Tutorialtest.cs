@@ -38,7 +38,7 @@ public class Tutorialtest: MonoBehaviour
         "\n"+
         "2. Attack & Magic Points (MP)\n"+
         "1P Attack: Press E to attack and increase MP.\n"+
-        "2P Attack: Press B to attack and increase MP.";
+        "2P Attack: Press I to attack and increase MP.";
     }
 
     void Showtul2()

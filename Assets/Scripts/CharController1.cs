@@ -109,7 +109,7 @@ public class CharController1 : MonoBehaviour
          {
             fightTimer=fightRate;
         }
-        if (Input.GetKeyDown("b")&& fightTimer >= fightRate&&!isPunch&&!isKick&&!isMg)
+        if (Input.GetKeyDown("i")&& fightTimer >= fightRate&&!isPunch&&!isKick&&!isMg)
         {
            isPunch=true;
             animator.SetTrigger("punch");
@@ -130,7 +130,7 @@ public class CharController1 : MonoBehaviour
             killimage.color= new Color(205f/255f, 205f/255f, 205f/255f,0.7f);;
         }
 
-        if (Input.GetKeyDown("n") && kickTimer >= kickRate&&!isPunch&&!isKick&&!isMg&&currMp>=kickMp)//踢撃條件達成
+        if (Input.GetKeyDown("o") && kickTimer >= kickRate&&!isPunch&&!isKick&&!isMg&&currMp>=kickMp)//踢撃條件達成
         {
             
            isKick=true;
@@ -150,7 +150,7 @@ public class CharController1 : MonoBehaviour
         }
          
 
-        if (Input.GetKeyDown("m") && mgTimer >= mgRate&&!isPunch&&!isKick&&!isMg&&shop.isBuymg&&currMp>=mgMp)// &&currMp>=mgMp
+        if (Input.GetKeyDown("p") && mgTimer >= mgRate&&!isPunch&&!isKick&&!isMg&&shop.isBuymg&&currMp>=mgMp)
         {
              isMg=true;
            currMp-=mgMp;
