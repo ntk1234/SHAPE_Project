@@ -72,7 +72,7 @@ public class ReviveHealthManger : MonoBehaviour
 
         // Reset player position, health, etc.
           if(playerID == 1){
-        lastPlayer1Position = respwanPosition;
+        respwanPosition=lastPlayer1Position;
         newplayer= Instantiate(player, respwanPosition, Quaternion.identity); 
         canvasController.player1=newplayer;//找canvasController腳本
         canvasController.player1Health = newplayer.GetComponent<PlayerHealth>();
@@ -87,7 +87,7 @@ public class ReviveHealthManger : MonoBehaviour
 
         else if (playerID == 2)
         
-        { lastPlayer2Position = respwanPosition;
+        { respwanPosition = lastPlayer2Position ;
         newplayer= Instantiate(player, respwanPosition, Quaternion.identity); 
         canvasController.player2=newplayer;
         canvasController.player2Health = newplayer.GetComponent<PlayerHealth>();

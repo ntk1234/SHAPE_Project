@@ -177,7 +177,7 @@ public class Shop : MonoBehaviour
             rhm.RevivePlayer1P();
 ;
             isBuy1Pre=true;
-    
+            ph.currentHealth=100;
             Debug.Log("Buyre1p purchased!");
             shopText.text="1p player resurrected!";
          
@@ -209,7 +209,7 @@ public class Shop : MonoBehaviour
 
           
             isBuy2Pre=true;
-
+            ph2.currentHealth=100;
             Debug.Log("Buyre2p purchased!");
             shopText.text="2p player resurrected!";
          
